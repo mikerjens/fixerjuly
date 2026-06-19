@@ -249,8 +249,8 @@ const people = [
 
   {id:"palweihe", group:"contrib", name:"Professor Pál Weihe", org:"Health / research", role:"Interview — pollutants in pilot whale meat", email:"palweihe@gmail.com", phone:"+298 21 66 96", status:"confirmed"},
   {id:"susanna", group:"contrib", name:"Súsanna Sørensen", org:"Visit Faroe Islands", role:"Interview — language, identity & culture", email:"susannas@visitfaroeislands.com", phone:"+298 55 61 38", status:"confirmed"},
-  {id:"joannes", group:"contrib", name:"Jóannes Eidesgaard", org:"Former Prime Minister", role:"Government interview", email:"joanneseidesgaard@gmail.com", phone:"+298 59 44 77", status:"confirmed"},
-  {id:"beinir", group:"contrib", name:"Beinir Johannesen", org:"Government / politics", role:"Government interview (alternative)", email:"", phone:"", status:"requested"},
+  {id:"joannes", group:"contrib", name:"Jóannes Eidesgaard", org:"Former Prime Minister", role:"Government interview — backup", email:"joanneseidesgaard@gmail.com", phone:"+298 59 44 77", status:"confirmed"},
+  {id:"beinir", group:"contrib", name:"Beinir Johannesen", org:"Prime Minister of the Faroe Islands", role:"Government interview — main", email:"", phone:"", status:"confirmed"},
   {id:"enviro", group:"contrib", name:"Environmental / climate expert", org:"TBC", role:"Interview — climate & marine environment", email:"", phone:"", status:"tbc"},
   {id:"fishfam", group:"contrib", name:"Fishing family", org:"TBC", role:"Main human story — sea, tradition, future", email:"", phone:"", status:"tbc"},
   {id:"skipper", group:"contrib", name:"Fishing boat skipper", org:"TBC", role:"Boat filming / sea B-roll", email:"", phone:"", status:"tbc"},
@@ -263,40 +263,41 @@ const days = [
     date:"Sat 25 July", focus:"Arrival day",
     scenes:[
       {time:"Daytime", title:"Crew arrival & transfer", status:"confirmed", location:"Vágar Airport (FAE) → accommodation", crew:["michael","rhys","jeff","steveA","johnB"], notes:"Flight RC417 lands 14:35. Airport pickup and transfer to accommodation. Short production briefing with Michael if timing allows."},
-      {time:"17:30", title:"Interview — Professor Pál Weihe", status:"confirmed", location:"TBC — location with Pál Weihe", crew:["michael","jeff","steveA","palweihe"], notes:"Pollutants in pilot whale meat and the health debate around traditional Faroese food.", links:[]},
+      {time:"17:30", title:"Interview — Professor Pál Weihe", status:"confirmed", location:"TBC — location with Pál Weihe", crew:["michael","rhys","jeff","steveA","johnB","palweihe"], notes:"Pollutants in pilot whale meat and the health debate around traditional Faroese food.", links:[]},
     ]
   },
   {
     date:"Sun 26 July", focus:"Environmental & fishing family day",
     scenes:[
-      {time:"Morning", title:"Environmental / climate interview", status:"tbc", location:"TBC", crew:["michael","jeff","steveA","enviro"], notes:"Themes: North Atlantic change, fish migration, sea temperature, rougher weather, marine ecosystems, salmon farming, lobster — how climate affects Faroese fishing, industry and island life."},
-      {time:"Afternoon", title:"Fishing family story", status:"tbc", location:"Harbour / family home — TBC", crew:["michael","jeff","steveA","fishfam","skipper"], notes:"The likely most important human story in the film — family interview, harbour scenes, boat access if possible, older/younger generation perspectives, B-roll of boats and fishing gear. Weather & safety will decide if boat filming happens this day or is moved."},
+      {time:"Morning", title:"Environmental / climate interview", status:"tbc", location:"TBC", crew:["michael","rhys","jeff","steveA","johnB","enviro"], notes:"Themes: North Atlantic change, fish migration, sea temperature, rougher weather, marine ecosystems, salmon farming, lobster — how climate affects Faroese fishing, industry and island life."},
+      {time:"Afternoon", title:"Fishing family story", status:"tbc", location:"Harbour / family home — TBC", crew:["michael","rhys","jeff","steveA","johnB","fishfam","skipper"], notes:"The likely most important human story in the film — family interview, harbour scenes, boat access if possible, older/younger generation perspectives, B-roll of boats and fishing gear. Weather & safety will decide if boat filming happens this day or is moved."},
     ]
   },
   {
     date:"Mon 27 July", focus:"Language, identity & government day",
     scenes:[
-      {time:"Morning", title:"Interview — Súsanna Sørensen", status:"confirmed", location:"Visit Faroe Islands — TBC", crew:["michael","jeff","steveA","susanna"], notes:"Faroese language and cultural identity, the Google Translate discussion, technology and small languages, language/tourism/identity."},
-      {time:"Afternoon", title:"Government interview", status:"confirmed", location:"TBC", crew:["michael","jeff","steveA","joannes"], notes:"Confirmed contributor: Jóannes Eidesgaard (former PM) — questions in English, answers in Faroese. Backup option: Beinir Johannesen (not yet confirmed). Topics: climate adaptation, relationship with the sea, governance & relationship to Denmark/EU, language & culture, youth retention, future outlook."},
-      {time:"Flexible", title:"Tórshavn B-roll", status:"info", location:"Tórshavn city centre", crew:["michael","jeff","steveA","johnB"], notes:"Best window before Ólavsøka gets busy — harbour scenes, city atmosphere, people preparing for Ólavsøka. Also serves as backup interview slot if needed."},
+      {time:"08:00", title:"Interview — Súsanna Sørensen", status:"confirmed", location:"Tinganes, Visit Faroe Islands", crew:["michael","rhys","jeff","steveA","johnB","susanna"], notes:"Faroese language and cultural identity, the Google Translate discussion, technology and small languages, language/tourism/identity."},
+      {time:"10:00–11:30", title:"Government interview — Prime Minister Beinir Johannesen", status:"confirmed", location:"Tinganes, Landsstýrið", crew:["michael","rhys","jeff","steveA","johnB","beinir"], notes:"10:00 interview setup · 10:45 Prime Minister arrives, interview begins · 11:30 interview finished. PM answers in English. Note: the climate-change question is dropped at the PM's request (not seen as relevant for the Faroe Islands) — remaining topics: relationship with the sea, governance & relationship to Denmark/EU, language & culture preservation, youth retention, future outlook."},
+      {time:"14:00", title:"Backup government interview — Jóannes Eidesgaard", status:"confirmed", location:"Location TBC", crew:["michael","rhys","jeff","steveA","johnB","joannes"], notes:"Confirmed backup in case the Prime Minister interview is cancelled, or as an additional society/politics angle. Questions in English, answers in Faroese — same theme list as the PM interview."},
+      {time:"Flexible", title:"Tórshavn B-roll", status:"info", location:"Tórshavn city centre", crew:["michael","rhys","jeff","steveA","johnB"], notes:"Best window before Ólavsøka gets busy — harbour scenes, city atmosphere, people preparing for Ólavsøka. Also serves as backup interview slot if needed."},
     ]
   },
   {
     date:"Tue 28 July", focus:"Ólavsøka & B-roll",
     scenes:[
-      {time:"All day", title:"Ólavsøka atmosphere & B-roll", status:"info", location:"Tórshavn", crew:["michael","jeff","steveA","johnB"], notes:"National dress, streets of Tórshavn, crowds, rowing atmosphere, music & cultural events, flags, piece to camera with Jeff Moody, short vox pops. Mainly a visual/atmosphere day — no heavy sit-down interviews unless a special opportunity arises. Tórshavn will be very busy — plan movement, parking and access carefully."},
+      {time:"All day", title:"Ólavsøka atmosphere & B-roll", status:"info", location:"Tórshavn", crew:["michael","rhys","jeff","steveA","johnB"], notes:"National dress, streets of Tórshavn, crowds, rowing atmosphere, music & cultural events, flags, piece to camera with Jeff Moody, short vox pops. Mainly a visual/atmosphere day — no heavy sit-down interviews unless a special opportunity arises. Tórshavn will be very busy — plan movement, parking and access carefully."},
     ]
   },
   {
     date:"Wed 29 July", focus:"Ólavsøka & B-roll (continued)",
     scenes:[
-      {time:"All day", title:"Ólavsøka atmosphere & B-roll", status:"info", location:"Tórshavn", crew:["michael","jeff","steveA","johnB"], notes:"Morning atmosphere, national dress arrivals, cultural events, official moments if relevant, street life, family scenes, additional piece to camera. Second chance if weather, crowds or access were difficult on 28 July."},
+      {time:"All day", title:"Ólavsøka atmosphere & B-roll", status:"info", location:"Tórshavn", crew:["michael","rhys","jeff","steveA","johnB"], notes:"Morning atmosphere, national dress arrivals, cultural events, official moments if relevant, street life, family scenes, additional piece to camera. Second chance if weather, crowds or access were difficult on 28 July."},
     ]
   },
   {
     date:"Thu 30 July", focus:"Tunnel PTC, drone & pickup day",
     scenes:[
-      {time:"All day", title:"Tunnel PTC, drone & final visuals", status:"info", location:"Undersea tunnel / roundabout + island locations", crew:["michael","jeff","steveA","johnB"], notes:"Tunnel / undersea roundabout piece to camera, drone filming (weather & permissions allowing), coastal B-roll — waterfalls, seascapes, harbours, mountain roads, villages. Final flexible day to complete the story visually."},
+      {time:"All day", title:"Tunnel PTC, drone & final visuals", status:"info", location:"Undersea tunnel / roundabout + island locations", crew:["michael","rhys","jeff","steveA","johnB"], notes:"Tunnel / undersea roundabout piece to camera, drone filming (weather & permissions allowing), coastal B-roll — waterfalls, seascapes, harbours, mountain roads, villages. Final flexible day to complete the story visually."},
     ]
   },
   {
