@@ -1,352 +1,492 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CGTN Faroe Islands — Production Portal</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<title>FIXER.FO — CGTN Faroe Islands</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:14px;color:#1a1a1a;background:#f5f5f5;min-height:100vh}
-.portal{max-width:820px;margin:0 auto;background:#fff;min-height:100vh}
-.hdr{background:#111;color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:100}
-.hdr-left{display:flex;align-items:center;gap:12px}
-.hdr-logo{display:flex;align-items:center;cursor:pointer;text-decoration:none;line-height:1}
-.hdr-logo-text{font-size:20px;font-weight:900;letter-spacing:-0.5px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-.hdr-logo-text .fx{color:#C1001F}
-.hdr-logo-text .dot{color:#fff}
-.hdr-logo-text .fo{color:#C1001F}
-.hdr-logo:hover .hdr-logo-text .fx,.hdr-logo:hover .hdr-logo-text .fo{color:#e8001f}
-.hdr-title{font-size:15px;font-weight:600;color:#fff}
-.hdr-sub{font-size:12px;color:#aaa;margin-top:1px}
-.hdr-select{background:#222;color:#fff;border:1px solid #444;border-radius:8px;padding:8px 12px;font-size:13px;cursor:pointer;min-width:200px}
-.hdr-select:focus{outline:none;border-color:#666}
-.tabs{display:flex;border-bottom:1px solid #e5e5e5;background:#fafafa;position:sticky;top:61px;z-index:99}
-.tab{padding:11px 20px;font-size:13px;cursor:pointer;border-bottom:2px solid transparent;color:#666;display:flex;align-items:center;gap:6px;white-space:nowrap;font-weight:500}
-.tab.active{border-bottom-color:#C1001F;color:#111}
-.tab:hover:not(.active){color:#333;background:#f0f0f0}
-.pane{display:none;padding:20px}
-.pane.active{display:block}
-.section-title{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.6px;margin-bottom:14px}
-.day-card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;margin-bottom:14px;overflow:hidden}
-.day-hdr{padding:13px 16px;border-bottom:1px solid #e5e5e5;display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fafafa}
-.day-hdr-left{display:flex;align-items:center;gap:10px}
-.day-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-.day-date{font-size:13px;font-weight:600;color:#111}
-.day-focus{font-size:12px;color:#666;margin-top:1px}
-.day-badge{font-size:11px;padding:3px 10px;border-radius:20px;white-space:nowrap;font-weight:500}
-.badge-green{background:#EAF3DE;color:#27500A}
-.badge-amber{background:#FEF3CD;color:#7a5000}
-.badge-red{background:#FDECEA;color:#8B1A1A}
-.day-body{padding:16px}
-.scene{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #f0f0f0}
-.scene:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
-.scene-row{display:flex;gap:14px}
-.scene-time-col{min-width:72px;padding-top:2px;flex-shrink:0}
-.scene-time{font-size:12px;color:#888;font-weight:600}
-.scene-content{flex:1}
-.scene-title{font-size:13px;font-weight:600;color:#111;margin-bottom:4px}
-.scene-desc{font-size:12px;color:#666;line-height:1.6;margin-bottom:8px}
-.meta-item{display:flex;align-items:flex-start;gap:6px;margin-bottom:6px;font-size:12px}
-.meta-item i{color:#999;flex-shrink:0;margin-top:1px}
-.meta-label{color:#888;min-width:52px}
-.meta-val{color:#333}
-.chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:8px}
-.chip{font-size:11px;padding:2px 9px;border-radius:20px;font-weight:500}
-.chip-blue{background:#E6F1FB;color:#0C447C}
-.chip-gray{background:#f0f0f0;color:#555}
-.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-.link-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:5px 11px;border-radius:7px;border:1px solid #ddd;color:#185FA5;text-decoration:none;background:#fff;font-weight:500}
-.link-btn:hover{background:#f0f6ff;border-color:#b5d4f4}
-.my-highlight{border-left:3px solid #C1001F}
-.contact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.contact-card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:14px;display:flex;align-items:flex-start;gap:11px}
-.c-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
-.c-name{font-size:13px;font-weight:600;color:#111}
-.c-role{font-size:11px;color:#888;margin-top:2px;line-height:1.4}
-.c-phone{font-size:11px;color:#555;margin-top:4px;display:flex;align-items:center;gap:4px}
-.empty-state{text-align:center;padding:3rem 1rem;color:#999;font-size:13px}
-.empty-state i{font-size:28px;display:block;margin-bottom:10px;color:#ccc}
-.my-profile-bar{background:#f7f7f7;border:1px solid #e5e5e5;border-radius:10px;padding:13px 16px;margin-bottom:16px;display:flex;align-items:center;gap:12px}
-.my-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex-shrink:0}
-.status-bar{background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:8px 14px;font-size:12px;color:#7a5000;margin-bottom:16px;display:flex;align-items:center;gap:7px}
-@media(max-width:600px){
-  .hdr{flex-direction:column;align-items:flex-start}
-  .hdr-select{width:100%}
-  .tabs .tab{padding:10px 13px;font-size:12px}
-  .pane{padding:14px}
-  .scene-row{flex-direction:column;gap:4px}
-  .scene-time-col{min-width:auto}
-  .contact-grid{grid-template-columns:1fr}
-}
+  :root{
+    --bg:#0b0c0d;
+    --panel:#15161a;
+    --panel2:#1c1d22;
+    --line:#2a2b30;
+    --text:#f2f2f0;
+    --muted:#9a9ca3;
+    --red:#e21b32;
+    --red-dim:#3a1318;
+    --green:#27c281;
+    --green-dim:#10301f;
+    --amber:#e8a23a;
+    --amber-dim:#3a2c10;
+    --blue:#4f9bff;
+    --blue-dim:#10233a;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:60px;
+  }
+  a{color:var(--blue);text-decoration:none;}
+
+  /* HEADER */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:#0a0a0b;
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:1000px;margin:0 auto;
+    padding:14px 20px;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:16px;flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:baseline;gap:10px;cursor:pointer;user-select:none;}
+  .brand-mark{
+    font-family:'Oswald','Inter',sans-serif;
+    font-weight:700;font-size:22px;letter-spacing:0.5px;
+    color:var(--red);
+  }
+  .brand-sub{
+    font-size:12px;color:var(--muted);
+    letter-spacing:1.5px;text-transform:uppercase;
+    border-left:1px solid var(--line);padding-left:10px;
+  }
+  .name-select-wrap{display:flex;align-items:center;gap:8px;}
+  select{
+    background:var(--panel2);color:var(--text);
+    border:1px solid var(--line);border-radius:8px;
+    padding:9px 12px;font-size:14px;font-family:inherit;
+    min-width:220px;cursor:pointer;
+  }
+  select:focus{outline:2px solid var(--red);outline-offset:1px;}
+
+  .tabs{
+    max-width:1000px;margin:0 auto;
+    display:flex;gap:4px;padding:0 20px;
+    border-top:1px solid var(--line);
+  }
+  .tab-btn{
+    background:none;border:none;color:var(--muted);
+    font-family:inherit;font-size:14px;font-weight:600;
+    padding:13px 16px;cursor:pointer;
+    border-bottom:3px solid transparent;
+    letter-spacing:0.3px;
+  }
+  .tab-btn.active{color:var(--text);border-bottom-color:var(--red);}
+  .tab-btn:hover{color:var(--text);}
+
+  main{max-width:1000px;margin:0 auto;padding:24px 20px 60px;}
+  .view{display:none;}
+  .view.active{display:block;}
+
+  .page-title{
+    font-family:'Oswald','Inter',sans-serif;
+    font-size:26px;font-weight:600;margin:0 0 4px;letter-spacing:0.3px;
+  }
+  .page-sub{color:var(--muted);font-size:14px;margin:0 0 22px;}
+
+  /* DAY CARD */
+  .day-card{
+    background:var(--panel);border:1px solid var(--line);
+    border-radius:14px;margin-bottom:18px;overflow:hidden;
+  }
+  .day-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 20px;background:var(--panel2);
+    border-bottom:1px solid var(--line);
+    flex-wrap:wrap;gap:8px;
+  }
+  .day-head-left{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .day-date{font-family:'Oswald','Inter',sans-serif;font-size:18px;font-weight:600;}
+  .day-name{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:1px;}
+  .day-focus{font-size:13px;color:var(--muted);font-style:italic;}
+
+  .scenes{padding:6px 14px 14px;}
+  .scene{
+    background:var(--bg);border:1px solid var(--line);
+    border-radius:10px;padding:14px 16px;margin:10px 0;
+  }
+  .scene-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap;}
+  .scene-title{font-weight:600;font-size:15px;margin:0;}
+  .scene-time{color:var(--muted);font-size:13px;margin-top:2px;}
+  .badge{
+    font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;
+    padding:4px 9px;border-radius:20px;white-space:nowrap;
+  }
+  .badge-confirmed{background:var(--green-dim);color:var(--green);}
+  .badge-tbc{background:var(--amber-dim);color:var(--amber);}
+  .badge-requested{background:var(--blue-dim);color:var(--blue);}
+  .badge-info{background:var(--panel2);color:var(--muted);}
+
+  .scene-meta{display:flex;flex-wrap:wrap;gap:14px;margin-top:8px;font-size:13px;color:var(--muted);}
+  .scene-meta span b{color:var(--text);font-weight:500;}
+
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .chip{
+    background:var(--panel2);border:1px solid var(--line);
+    border-radius:20px;padding:4px 10px;font-size:12px;color:var(--text);
+  }
+  .chip.me{border-color:var(--red);color:var(--red);}
+
+  .scene-notes{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.45;}
+  .scene-links{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;}
+  .link-btn{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--panel2);border:1px solid var(--line);
+    color:var(--text);font-size:12px;padding:6px 10px;border-radius:8px;
+  }
+  .link-btn:hover{border-color:var(--red);}
+
+  /* CONTACTS */
+  .contact-group{margin-bottom:26px;}
+  .contact-group h3{
+    font-family:'Oswald','Inter',sans-serif;
+    font-size:15px;text-transform:uppercase;letter-spacing:1px;
+    color:var(--muted);margin:0 0 10px;
+  }
+  .contact-card{
+    background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;padding:14px 16px;margin-bottom:8px;
+    display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  }
+  .contact-info{flex:1;min-width:200px;}
+  .contact-name{font-weight:600;font-size:15px;}
+  .contact-role{color:var(--muted);font-size:13px;margin-top:2px;}
+  .contact-links{display:flex;flex-direction:column;gap:4px;font-size:13px;text-align:right;}
+
+  /* EMPTY STATE */
+  .empty-state{
+    text-align:center;padding:60px 20px;color:var(--muted);
+  }
+  .empty-state .big{font-size:40px;margin-bottom:10px;}
+
+  .flight-box{
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:16px 18px;margin-bottom:20px;font-size:13px;color:var(--muted);
+  }
+  .flight-box b{color:var(--text);}
+  .flight-box .flight-row{margin:4px 0;}
+
+  footer{
+    text-align:center;color:var(--muted);font-size:12px;
+    padding:30px 20px;border-top:1px solid var(--line);margin-top:20px;
+  }
+
+  @media (max-width:560px){
+    .header-inner{padding:12px 14px;}
+    select{min-width:160px;font-size:13px;}
+    .brand-sub{display:none;}
+    main{padding:18px 14px 50px;}
+  }
 </style>
 </head>
 <body>
-<div class="portal">
 
-  <div class="hdr">
-    <div class="hdr-left">
-      <a class="hdr-logo" onclick="goHome()" title="Back to schedule">
-        <span class="hdr-logo-text"><span class="fx">FIXER</span><span class="dot">.</span><span class="fo">FO</span></span>
-      </a>
-      <div>
-        <div class="hdr-title">Faroe Islands Production Portal</div>
-        <div class="hdr-sub">CGTN × FIXER sp/f &nbsp;·&nbsp; 25–31 July 2026</div>
-      </div>
+<header>
+  <div class="header-inner">
+    <div class="brand" id="logoReset">
+      <span class="brand-mark">FIXER.FO</span>
+      <span class="brand-sub">CGTN Faroe Islands</span>
     </div>
-    <select class="hdr-select" id="nameSelect" onchange="selectPerson(this.value)">
-      <option value="">— Select your name —</option>
-      <optgroup label="Production crew">
-        <option value="michael">Michael Koba — Local Producer / Fixer</option>
-        <option value="rhys">Rhys Lennon — Client contact, CGTN</option>
-        <option value="jeff">Jeff Moody — Correspondent, CGTN</option>
-        <option value="camera">Camera operator — CGTN (TBC)</option>
-      </optgroup>
-      <optgroup label="Contributors">
-        <option value="pal">Prof. Pál Weihe — Health / Research</option>
-        <option value="gudrid">Guðrið Højgaard — Language / Culture</option>
-        <option value="beinir">Beinir Johannesen — Government</option>
-        <option value="fishing">Fishing family — TBC</option>
-        <option value="climate">Climate expert — TBC</option>
-      </optgroup>
-    </select>
-  </div>
-
-  <div class="tabs">
-    <div class="tab active" onclick="showTab('schedule',this)"><i class="ti ti-calendar"></i> Schedule</div>
-    <div class="tab" onclick="showTab('contacts',this)"><i class="ti ti-users"></i> Contacts</div>
-    <div class="tab" onclick="showTab('myschedule',this)"><i class="ti ti-star"></i> My schedule</div>
-  </div>
-
-  <div class="pane active" id="pane-schedule">
-    <div class="section-title" id="sched-subtitle">25–31 July 2026 · Full shoot schedule</div>
-    <div id="scheduleCards"></div>
-  </div>
-
-  <div class="pane" id="pane-contacts">
-    <div class="section-title">Production team &amp; contributors</div>
-    <div class="contact-grid" id="contactGrid"></div>
-  </div>
-
-  <div class="pane" id="pane-myschedule">
-    <div id="mySchedContent">
-      <div class="empty-state"><i class="ti ti-user"></i>Select your name above to see your personal schedule</div>
+    <div class="name-select-wrap">
+      <select id="nameSelect">
+        <option value="">Select your name…</option>
+        <optgroup label="Production crew" id="grpCrew"></optgroup>
+        <optgroup label="Contributors" id="grpContrib"></optgroup>
+      </select>
     </div>
   </div>
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="schedule">Schedule</button>
+    <button class="tab-btn" data-tab="contacts">Contacts</button>
+    <button class="tab-btn" data-tab="myschedule">My Schedule</button>
+  </nav>
+</header>
 
-</div>
+<main>
+
+  <!-- SCHEDULE -->
+  <section class="view active" id="view-schedule">
+    <h1 class="page-title">Production Schedule</h1>
+    <p class="page-sub">CGTN Faroe Islands — Ólavsøka shoot, 25–31 July 2026</p>
+
+    <div class="flight-box">
+      <div class="flight-row"><b>Arrival:</b> RC417 · 25 JUL · LGW → FAE · 12:20–14:35 (Rhys, Jeff, Steve A, JohnB)</div>
+      <div class="flight-row"><b>Departure:</b> SK1778 · 31 JUL · FAE → CPH · 13:25–16:35, connecting to SK1507 · CPH → LHR · 17:30–18:30</div>
+    </div>
+
+    <div id="scheduleDays"></div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section class="view" id="view-contacts">
+    <h1 class="page-title">Key Production Contacts</h1>
+    <p class="page-sub">Local production, CGTN team and contributors</p>
+    <div id="contactsList"></div>
+  </section>
+
+  <!-- MY SCHEDULE -->
+  <section class="view" id="view-myschedule">
+    <h1 class="page-title">My Schedule</h1>
+    <p class="page-sub" id="mySub">Select your name above to see your personal schedule</p>
+    <div id="myScheduleContent"></div>
+  </section>
+
+</main>
+
+<footer>FIXER sp/f — Local production & fixing, Faroe Islands</footer>
 
 <script>
-const PEOPLE = [
-  {id:"michael",name:"Michael Koba",role:"Local Producer / Fixer / Driver",initials:"MK",bg:"#E6F1FB",color:"#0C447C",days:["25","26","27","28","29","30","31"],phone:"+298 [TBC]",status:"confirmed"},
-  {id:"rhys",name:"Rhys Lennon",role:"Client contact · CGTN",initials:"RL",bg:"#EAF3DE",color:"#27500A",days:["25","26","27","28","29","30","31"],phone:"[insert]",status:"confirmed"},
-  {id:"jeff",name:"Jeff Moody",role:"Correspondent · CGTN",initials:"JM",bg:"#FAECE7",color:"#712B13",days:["25","26","27","28","29","30","31"],phone:"+44 7525 033 043",status:"confirmed"},
-  {id:"camera",name:"Camera operator",role:"CGTN · Name TBC",initials:"?",bg:"#FAEEDA",color:"#633806",days:["25","26","27","28","29","30","31"],phone:"TBC",status:"tbc"},
-  {id:"pal",name:"Prof. Pál Weihe",role:"Contributor · Health / Research",initials:"PW",bg:"#FBEAF0",color:"#72243E",days:["25"],phone:"[insert]",status:"confirmed"},
-  {id:"gudrid",name:"Guðrið Højgaard",role:"Contributor · Language / Culture",initials:"GH",bg:"#E1F5EE",color:"#085041",days:["27"],phone:"[insert]",status:"tbc"},
-  {id:"beinir",name:"Beinir Johannesen",role:"Contributor · Government",initials:"BJ",bg:"#EEEDFE",color:"#3C3489",days:["27"],phone:"[insert]",status:"tbc"},
-  {id:"fishing",name:"Fishing family",role:"Contributor · TBC",initials:"FF",bg:"#F1EFE8",color:"#444441",days:["26"],phone:"TBC",status:"tbc"},
-  {id:"climate",name:"Climate expert",role:"Contributor · TBC",initials:"CE",bg:"#F1EFE8",color:"#444441",days:["26"],phone:"TBC",status:"tbc"},
+// ---------- DATA ----------
+const people = [
+  {id:"michael", group:"crew", name:"Michael Koba", org:"FIXER sp/f", role:"Local Producer / Fixer / Driver", email:"", phone:"", notes:"Main local contact in the Faroe Islands."},
+  {id:"rhys", group:"crew", name:"Rhys Lennon", org:"CGTN", role:"Client / Production contact", email:"", phone:""},
+  {id:"jeff", group:"crew", name:"Jeff Moody", org:"CGTN", role:"Correspondent / Anchor", email:"", phone:"+44 7525 033 043"},
+  {id:"steveA", group:"crew", name:"Steve A", org:"CGTN", role:"Camera operator / Photographer", email:"", phone:"+44 7768 745665"},
+  {id:"johnB", group:"crew", name:"JohnB", org:"CGTN", role:"Camera operator / Photographer", email:"", phone:"+44 7812 378957"},
+
+  {id:"palweihe", group:"contrib", name:"Professor Pál Weihe", org:"Health / research", role:"Interview — pollutants in pilot whale meat", email:"palweihe@gmail.com", phone:"+298 21 66 96", status:"confirmed"},
+  {id:"susanna", group:"contrib", name:"Súsanna Sørensen", org:"Visit Faroe Islands", role:"Interview — language, identity & culture", email:"susannas@visitfaroeislands.com", phone:"+298 55 61 38", status:"confirmed"},
+  {id:"joannes", group:"contrib", name:"Jóannes Eidesgaard", org:"Former Prime Minister", role:"Government interview", email:"joanneseidesgaard@gmail.com", phone:"+298 59 44 77", status:"confirmed"},
+  {id:"beinir", group:"contrib", name:"Beinir Johannesen", org:"Government / politics", role:"Government interview (alternative)", email:"", phone:"", status:"requested"},
+  {id:"enviro", group:"contrib", name:"Environmental / climate expert", org:"TBC", role:"Interview — climate & marine environment", email:"", phone:"", status:"tbc"},
+  {id:"fishfam", group:"contrib", name:"Fishing family", org:"TBC", role:"Main human story — sea, tradition, future", email:"", phone:"", status:"tbc"},
+  {id:"skipper", group:"contrib", name:"Fishing boat skipper", org:"TBC", role:"Boat filming / sea B-roll", email:"", phone:"", status:"tbc"},
 ];
 
-const DAYS = [
-  {id:"25",label:"Sat 25 July",focus:"Arrival & possible evening interview",dot:"#B5D4F4",
-   scenes:[
-    {time:"Afternoon",title:"Arrival & airport transfer",desc:"Crew arrives in Faroe Islands. Airport pickup, transfer to accommodation. Production briefing with Michael Koba.",who:["michael","rhys","jeff","camera"],tags:["Logistics"],status:"tbc",meet:"Airport",links:[]},
-    {time:"Evening",title:"Interview — Prof. Pál Weihe",desc:"Pollutants in pilot whale meat and public health recommendations. Can be moved if crew is too tired after travel.",who:["michael","jeff","camera","pal"],tags:["Interview","Health"],status:"confirmed",meet:"TBC — confirm with Pál",links:[{label:"Story notes",url:"#"},{label:"Background reading",url:"#"}]},
-  ]},
-  {id:"26",label:"Sun 26 July",focus:"Climate interview & fishing family",dot:"#9FE1CB",
-   scenes:[
-    {time:"Morning",title:"Interview — climate / environment expert",desc:"Changes in the North Atlantic: fish migration, sea temperature, rougher weather, marine ecosystems, salmon farming and environmental pressure.",who:["michael","jeff","camera","climate"],tags:["Interview","Climate"],status:"tbc",meet:"TBC — awaiting confirmation",links:[]},
-    {time:"Afternoon",title:"Fishing family — main human story",desc:"Traditional Faroese fishing family. Family interview, harbour scenes, possible boat access. Most important human story in the film — give it proper time.",who:["michael","jeff","camera","fishing"],tags:["Interview","Human story"],status:"tbc",meet:"TBC — awaiting confirmation",links:[{label:"Story element 1",url:"#"}]},
-    {time:"All day",title:"B-roll — harbour, boats & sea",desc:"Boats, harbour, sea, fishing gear, coastal life.",who:["michael","jeff","camera"],tags:["B-roll"],status:"tbc",meet:"",links:[]},
-  ]},
-  {id:"27",label:"Mon 27 July",focus:"Language / identity & government interview",dot:"#CECBF6",
-   scenes:[
-    {time:"Morning",title:"Interview — Guðrið Højgaard",desc:"Faroese language, cultural identity and the Google Translate angle. Why language matters for a small island nation.",who:["michael","jeff","camera","gudrid"],tags:["Interview","Culture"],status:"tbc",meet:"TBC — awaiting confirmation",links:[{label:"Story element 5",url:"#"}]},
-    {time:"Afternoon",title:"Government interview",desc:"Beinir Johannesen or relevant government representative. Faroe Islands' relationship with Denmark, EU, geopolitics and the future.",who:["michael","jeff","camera","beinir"],tags:["Interview","Politics"],status:"tbc",meet:"Government office, Tórshavn",links:[{label:"Story element 4",url:"#"}]},
-    {time:"All day",title:"Tórshavn B-roll",desc:"City scenes before Ólavsøka. Harbour, people preparing for the holiday.",who:["michael","jeff","camera"],tags:["B-roll"],status:"tbc",meet:"",links:[]},
-  ]},
-  {id:"28",label:"Tue 28 July",focus:"Ólavsøka day 1 — national holiday atmosphere",dot:"#FAC775",
-   scenes:[
-    {time:"All day",title:"Ólavsøka — atmosphere & B-roll",desc:"People in national dress, streets of Tórshavn, crowds, rowing, music, cultural events, families, flags. No heavy interviews today.",who:["michael","jeff","camera"],tags:["B-roll","Ólavsøka"],status:"confirmed",meet:"Tórshavn city centre",links:[{label:"Story element 6",url:"#"}]},
-    {time:"TBD",title:"Piece to camera — Jeff Moody",desc:"PTC during Ólavsøka. Possible short vox pops if relevant.",who:["michael","jeff","camera"],tags:["PTC"],status:"tbc",meet:"Tórshavn",links:[]},
-  ]},
-  {id:"29",label:"Wed 29 July",focus:"Ólavsøka day 2 — continued coverage",dot:"#FAC775",
-   scenes:[
-    {time:"All day",title:"Ólavsøka — continued coverage & B-roll",desc:"Morning atmosphere, national dress, cultural events, official moments, street life, music and celebration.",who:["michael","jeff","camera"],tags:["B-roll","Ólavsøka"],status:"confirmed",meet:"Tórshavn city centre",links:[]},
-    {time:"TBD",title:"Additional piece to camera",desc:"Build a strong visual archive around Faroese identity, culture and national life.",who:["michael","jeff","camera"],tags:["PTC"],status:"tbc",meet:"",links:[]},
-  ]},
-  {id:"30",label:"Thu 30 July",focus:"Tunnel PTC, drone & final pickup shots",dot:"#9FE1CB",
-   scenes:[
-    {time:"Morning",title:"Tunnel piece to camera",desc:"Undersea roundabout PTC — world's only underwater roundabout.",who:["michael","jeff","camera"],tags:["PTC","Visual"],status:"tbc",meet:"Eysturoyartunnilin entrance",links:[]},
-    {time:"Afternoon",title:"Drone & coastal landscape",desc:"Weather and permit dependent. Coasts, waterfalls, mountains, harbours, villages.",who:["michael","jeff","camera"],tags:["Drone","B-roll"],status:"tbc",meet:"TBC — weather dependent",links:[{label:"Story element 7",url:"#"}]},
-    {time:"All day",title:"Pickup shots — missing material",desc:"Flexible final shoot day to complete the story visually.",who:["michael","jeff","camera"],tags:["B-roll"],status:"tbc",meet:"",links:[]},
-  ]},
-  {id:"31",label:"Fri 31 July",focus:"Wrap & departure",dot:"#D3D1C7",
-   scenes:[
-    {time:"Morning",title:"Hotel pickup & departure",desc:"Transfer to airport. Final practical wrap. No filming planned unless agreed in advance.",who:["michael","rhys","jeff","camera"],tags:["Logistics"],status:"confirmed",meet:"Hotel lobby",links:[]},
-  ]},
+const byId = id => people.find(p=>p.id===id);
+
+const days = [
+  {
+    date:"Sat 25 July", focus:"Arrival day",
+    scenes:[
+      {time:"Daytime", title:"Crew arrival & transfer", status:"confirmed", location:"Vágar Airport (FAE) → accommodation", crew:["michael","rhys","jeff","steveA","johnB"], notes:"Flight RC417 lands 14:35. Airport pickup and transfer to accommodation. Short production briefing with Michael if timing allows."},
+      {time:"17:30", title:"Interview — Professor Pál Weihe", status:"confirmed", location:"TBC — location with Pál Weihe", crew:["michael","jeff","steveA","palweihe"], notes:"Pollutants in pilot whale meat and the health debate around traditional Faroese food.", links:[]},
+    ]
+  },
+  {
+    date:"Sun 26 July", focus:"Environmental & fishing family day",
+    scenes:[
+      {time:"Morning", title:"Environmental / climate interview", status:"tbc", location:"TBC", crew:["michael","jeff","steveA","enviro"], notes:"Themes: North Atlantic change, fish migration, sea temperature, rougher weather, marine ecosystems, salmon farming, lobster — how climate affects Faroese fishing, industry and island life."},
+      {time:"Afternoon", title:"Fishing family story", status:"tbc", location:"Harbour / family home — TBC", crew:["michael","jeff","steveA","fishfam","skipper"], notes:"The likely most important human story in the film — family interview, harbour scenes, boat access if possible, older/younger generation perspectives, B-roll of boats and fishing gear. Weather & safety will decide if boat filming happens this day or is moved."},
+    ]
+  },
+  {
+    date:"Mon 27 July", focus:"Language, identity & government day",
+    scenes:[
+      {time:"Morning", title:"Interview — Súsanna Sørensen", status:"confirmed", location:"Visit Faroe Islands — TBC", crew:["michael","jeff","steveA","susanna"], notes:"Faroese language and cultural identity, the Google Translate discussion, technology and small languages, language/tourism/identity."},
+      {time:"Afternoon", title:"Government interview", status:"confirmed", location:"TBC", crew:["michael","jeff","steveA","joannes"], notes:"Confirmed contributor: Jóannes Eidesgaard (former PM) — questions in English, answers in Faroese. Backup option: Beinir Johannesen (not yet confirmed). Topics: climate adaptation, relationship with the sea, governance & relationship to Denmark/EU, language & culture, youth retention, future outlook."},
+      {time:"Flexible", title:"Tórshavn B-roll", status:"info", location:"Tórshavn city centre", crew:["michael","jeff","steveA","johnB"], notes:"Best window before Ólavsøka gets busy — harbour scenes, city atmosphere, people preparing for Ólavsøka. Also serves as backup interview slot if needed."},
+    ]
+  },
+  {
+    date:"Tue 28 July", focus:"Ólavsøka & B-roll",
+    scenes:[
+      {time:"All day", title:"Ólavsøka atmosphere & B-roll", status:"info", location:"Tórshavn", crew:["michael","jeff","steveA","johnB"], notes:"National dress, streets of Tórshavn, crowds, rowing atmosphere, music & cultural events, flags, piece to camera with Jeff Moody, short vox pops. Mainly a visual/atmosphere day — no heavy sit-down interviews unless a special opportunity arises. Tórshavn will be very busy — plan movement, parking and access carefully."},
+    ]
+  },
+  {
+    date:"Wed 29 July", focus:"Ólavsøka & B-roll (continued)",
+    scenes:[
+      {time:"All day", title:"Ólavsøka atmosphere & B-roll", status:"info", location:"Tórshavn", crew:["michael","jeff","steveA","johnB"], notes:"Morning atmosphere, national dress arrivals, cultural events, official moments if relevant, street life, family scenes, additional piece to camera. Second chance if weather, crowds or access were difficult on 28 July."},
+    ]
+  },
+  {
+    date:"Thu 30 July", focus:"Tunnel PTC, drone & pickup day",
+    scenes:[
+      {time:"All day", title:"Tunnel PTC, drone & final visuals", status:"info", location:"Undersea tunnel / roundabout + island locations", crew:["michael","jeff","steveA","johnB"], notes:"Tunnel / undersea roundabout piece to camera, drone filming (weather & permissions allowing), coastal B-roll — waterfalls, seascapes, harbours, mountain roads, villages. Final flexible day to complete the story visually."},
+    ]
+  },
+  {
+    date:"Fri 31 July", focus:"Departure day",
+    scenes:[
+      {time:"Daytime", title:"Wrap & departure", status:"confirmed", location:"Accommodation → Vágar Airport (FAE)", crew:["michael","rhys","jeff","steveA","johnB"], notes:"Hotel pickup, airport transfer, final practical wrap-up. Flight SK1778 departs 13:25, connecting via Copenhagen to London (SK1507, 17:30). No formal filming planned unless agreed in advance."},
+    ]
+  },
 ];
 
-let currentPerson = null;
-
-function getPerson(id){ return PEOPLE.find(p=>p.id===id); }
-
-function statusBadge(s){
-  if(s==="confirmed") return '<span class="day-badge badge-green">Confirmed</span>';
-  return '<span class="day-badge badge-amber">Awaiting</span>';
+// ---------- RENDER HELPERS ----------
+function statusBadge(status){
+  const map = {
+    confirmed:["Confirmed","badge-confirmed"],
+    tbc:["TBC","badge-tbc"],
+    requested:["Requested","badge-requested"],
+    info:["Info","badge-info"],
+  };
+  const [label,cls] = map[status] || map.info;
+  return `<span class="badge ${cls}">${label}</span>`;
 }
 
-function chipHtml(tags){ return tags.map(t=>`<span class="chip chip-gray">${t}</span>`).join(""); }
-
-function whoHtml(who){
-  return who.map(id=>{
-    const p=getPerson(id);
-    if(!p) return "";
-    return `<span class="chip chip-blue">${p.name.split(" ")[0]}</span>`;
-  }).join("");
+function chipHtml(personId, selectedId){
+  const p = byId(personId);
+  if(!p) return "";
+  const isMe = selectedId && personId === selectedId;
+  return `<span class="chip${isMe?" me":""}">${p.name}</span>`;
 }
 
-function linksHtml(links){
-  if(!links.length) return "";
-  return `<div class="links">${links.map(l=>`<a class="link-btn" href="${l.url}" target="_blank"><i class="ti ti-file" style="font-size:13px"></i>${l.label}</a>`).join("")}</div>`;
-}
-
-function renderSchedule(filterPerson){
-  const container = document.getElementById("scheduleCards");
-  let html="";
-  DAYS.forEach(d=>{
-    const myDay = filterPerson ? filterPerson.days.includes(d.id) : true;
-    const visibleScenes = d.scenes;
-    if(filterPerson && !myDay) return;
-    const highlight = (filterPerson && myDay) ? " my-highlight" : "";
-    html+=`<div class="day-card${highlight}">
-      <div class="day-hdr">
-        <div class="day-hdr-left">
-          <div class="day-dot" style="background:${d.dot}"></div>
-          <div><div class="day-date">${d.label}</div><div class="day-focus">${d.focus}</div></div>
+function renderSchedule(){
+  const selectedId = document.getElementById("nameSelect").value;
+  const container = document.getElementById("scheduleDays");
+  container.innerHTML = days.map(day => `
+    <div class="day-card">
+      <div class="day-head">
+        <div class="day-head-left">
+          <span class="day-date">${day.date}</span>
+          <span class="day-focus">${day.focus}</span>
         </div>
-        ${filterPerson && myDay ? '<span class="day-badge badge-red">You\'re scheduled</span>' : ""}
       </div>
-      <div class="day-body">`;
-    visibleScenes.forEach(s=>{
-      html+=`<div class="scene">
-        <div class="scene-row">
-          <div class="scene-time-col"><span class="scene-time">${s.time}</span></div>
-          <div class="scene-content">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px">
-              <div class="scene-title">${s.title}</div>
+      <div class="scenes">
+        ${day.scenes.map(s => `
+          <div class="scene">
+            <div class="scene-top">
+              <div>
+                <p class="scene-title">${s.title}</p>
+                <div class="scene-time">${s.time}</div>
+              </div>
               ${statusBadge(s.status)}
             </div>
-            <div class="scene-desc">${s.desc}</div>
-            ${s.meet ? `<div class="meta-item"><i class="ti ti-map-pin" style="font-size:13px"></i><span class="meta-label">Meet at</span><span class="meta-val">${s.meet}</span></div>` : ""}
-            <div class="chips">${chipHtml(s.tags)}${whoHtml(s.who)}</div>
-            ${linksHtml(s.links)}
+            <div class="scene-meta">
+              <span>📍 <b>${s.location}</b></span>
+            </div>
+            <div class="chips">
+              ${s.crew.map(id=>chipHtml(id, selectedId)).join("")}
+            </div>
+            <div class="scene-notes">${s.notes}</div>
+            ${s.links && s.links.length ? `<div class="scene-links">${s.links.map(l=>`<a class="link-btn" href="${l.url}" target="_blank">🔗 ${l.label}</a>`).join("")}</div>` : ""}
           </div>
-        </div>
-      </div>`;
-    });
-    html+="</div></div>";
-  });
-  container.innerHTML = html;
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
 }
 
 function renderContacts(){
-  const grid = document.getElementById("contactGrid");
-  let html="";
-  PEOPLE.forEach(p=>{
-    const statusCls = p.status==="confirmed" ? "badge-green" : "badge-amber";
-    const statusTxt = p.status==="confirmed" ? "Confirmed" : "TBC";
-    const phoneHtml = (p.phone && p.phone!=="TBC" && p.phone!=="[insert]") ? `<div class="c-phone"><i class="ti ti-phone" style="font-size:12px"></i>${p.phone}</div>` : "";
-    html+=`<div class="contact-card">
-      <div class="c-avatar" style="background:${p.bg};color:${p.color}">${p.initials}</div>
-      <div style="flex:1">
-        <div class="c-name">${p.name}</div>
-        <div class="c-role">${p.role}</div>
-        ${phoneHtml}
-        <span class="day-badge ${statusCls}" style="margin-top:6px;display:inline-block">${statusTxt}</span>
-      </div>
-    </div>`;
-  });
-  grid.innerHTML = html;
+  const groups = [
+    {label:"Local production", filter:p=>p.id==="michael"},
+    {label:"CGTN production team", filter:p=>p.group==="crew" && p.id!=="michael"},
+    {label:"Contributors & interviewees", filter:p=>p.group==="contrib"},
+  ];
+  const container = document.getElementById("contactsList");
+  container.innerHTML = groups.map(g => `
+    <div class="contact-group">
+      <h3>${g.label}</h3>
+      ${people.filter(g.filter).map(p => `
+        <div class="contact-card">
+          <div class="contact-info">
+            <div class="contact-name">${p.name}</div>
+            <div class="contact-role">${p.org ? p.org+" — " : ""}${p.role}</div>
+          </div>
+          <div class="contact-links">
+            ${p.status ? statusBadge(p.status) : ""}
+            ${p.phone ? `<a href="tel:${p.phone.replace(/\s/g,"")}">${p.phone}</a>` : ""}
+            ${p.email ? `<a href="mailto:${p.email}">${p.email}</a>` : ""}
+          </div>
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
 }
 
 function renderMySchedule(){
-  const container = document.getElementById("mySchedContent");
-  if(!currentPerson){
-    container.innerHTML=`<div class="empty-state"><i class="ti ti-user"></i>Select your name above to see your personal schedule</div>`;
+  const selectedId = document.getElementById("nameSelect").value;
+  const sub = document.getElementById("mySub");
+  const content = document.getElementById("myScheduleContent");
+
+  if(!selectedId){
+    sub.textContent = "Select your name above to see your personal schedule";
+    content.innerHTML = `<div class="empty-state"><div class="big">👋</div>Vælg dit navn i toppen for at se dit personlige program.</div>`;
     return;
   }
-  const myDays = DAYS.filter(d=>currentPerson.days.includes(d.id));
-  if(!myDays.length){
-    container.innerHTML=`<div class="empty-state"><i class="ti ti-calendar-off"></i>No days scheduled yet for ${currentPerson.name}.</div>`;
+
+  const person = byId(selectedId);
+  const relevantDays = days
+    .map(day => ({...day, scenes: day.scenes.filter(s => s.crew.includes(selectedId))}))
+    .filter(day => day.scenes.length > 0);
+
+  sub.textContent = `Personligt program for ${person.name}`;
+
+  if(relevantDays.length === 0){
+    content.innerHTML = `<div class="empty-state"><div class="big">📭</div>Ingen planlagte punkter fundet for ${person.name} endnu.</div>`;
     return;
   }
-  let html=`<div class="my-profile-bar">
-    <div class="my-avatar" style="background:${currentPerson.bg};color:${currentPerson.color}">${currentPerson.initials}</div>
-    <div>
-      <div style="font-size:14px;font-weight:600">${currentPerson.name}</div>
-      <div style="font-size:12px;color:#888">${currentPerson.role} · ${myDays.length} shoot days</div>
-    </div>
-  </div>`;
-  myDays.forEach(d=>{
-    const myScenes = d.scenes.filter(s=>s.who.includes(currentPerson.id));
-    if(!myScenes.length) return;
-    html+=`<div class="day-card my-highlight" style="margin-bottom:14px">
-      <div class="day-hdr">
-        <div class="day-hdr-left">
-          <div class="day-dot" style="background:${d.dot}"></div>
-          <div><div class="day-date">${d.label}</div><div class="day-focus">${d.focus}</div></div>
+
+  content.innerHTML = relevantDays.map(day => `
+    <div class="day-card">
+      <div class="day-head">
+        <div class="day-head-left">
+          <span class="day-date">${day.date}</span>
+          <span class="day-focus">${day.focus}</span>
         </div>
-        <span class="day-badge badge-red">${myScenes.length} element${myScenes.length!==1?"er":""}</span>
       </div>
-      <div class="day-body">`;
-    myScenes.forEach(s=>{
-      html+=`<div class="scene">
-        <div class="scene-row">
-          <div class="scene-time-col"><span class="scene-time">${s.time}</span></div>
-          <div class="scene-content">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px">
-              <div class="scene-title">${s.title}</div>
+      <div class="scenes">
+        ${day.scenes.map(s => `
+          <div class="scene">
+            <div class="scene-top">
+              <div>
+                <p class="scene-title">${s.title}</p>
+                <div class="scene-time">${s.time}</div>
+              </div>
               ${statusBadge(s.status)}
             </div>
-            <div class="scene-desc">${s.desc}</div>
-            ${s.meet ? `<div class="meta-item"><i class="ti ti-map-pin" style="font-size:13px"></i><span class="meta-label">Meet at</span><span class="meta-val">${s.meet}</span></div>` : ""}
-            ${linksHtml(s.links)}
+            <div class="scene-meta">
+              <span>📍 <b>${s.location}</b></span>
+            </div>
+            <div class="chips">
+              ${s.crew.map(id=>chipHtml(id, selectedId)).join("")}
+            </div>
+            <div class="scene-notes">${s.notes}</div>
+            ${s.links && s.links.length ? `<div class="scene-links">${s.links.map(l=>`<a class="link-btn" href="${l.url}" target="_blank">🔗 ${l.label}</a>`).join("")}</div>` : ""}
           </div>
-        </div>
-      </div>`;
-    });
-    html+="</div></div>";
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
+}
+
+// ---------- POPULATE SELECT ----------
+function populateSelect(){
+  const grpCrew = document.getElementById("grpCrew");
+  const grpContrib = document.getElementById("grpContrib");
+  people.filter(p=>p.group==="crew").forEach(p=>{
+    const opt = document.createElement("option");
+    opt.value = p.id; opt.textContent = p.name;
+    grpCrew.appendChild(opt);
   });
-  container.innerHTML = html;
+  people.filter(p=>p.group==="contrib").forEach(p=>{
+    const opt = document.createElement("option");
+    opt.value = p.id; opt.textContent = p.name;
+    grpContrib.appendChild(opt);
+  });
 }
 
-function goHome(){
-  document.getElementById("nameSelect").value="";
-  selectPerson("");
-  const schedTab = document.querySelector(".tab");
-  showTab("schedule", schedTab);
-  window.scrollTo({top:0,behavior:"smooth"});
+// ---------- TABS ----------
+function showTab(tab){
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.toggle("active", b.dataset.tab===tab));
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  document.getElementById("view-"+tab).classList.add("active");
 }
 
-function selectPerson(id){
-  currentPerson = id ? getPerson(id) : null;
-  const sub = document.getElementById("sched-subtitle");
-  sub.textContent = currentPerson ? currentPerson.name+" · "+currentPerson.days.length+" days scheduled" : "25–31 July 2026 · Full shoot schedule";
-  renderSchedule(currentPerson);
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>showTab(btn.dataset.tab));
+});
+
+document.getElementById("logoReset").addEventListener("click", ()=>{
+  document.getElementById("nameSelect").value = "";
+  renderSchedule();
   renderMySchedule();
-}
+  showTab("schedule");
+});
 
-function showTab(name, el){
-  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
-  document.querySelectorAll(".pane").forEach(p=>p.classList.remove("active"));
-  el.classList.add("active");
-  document.getElementById("pane-"+name).classList.add("active");
-}
+document.getElementById("nameSelect").addEventListener("change", ()=>{
+  renderSchedule();
+  renderMySchedule();
+});
 
-renderSchedule(null);
+// ---------- INIT ----------
+populateSelect();
+renderSchedule();
 renderContacts();
 renderMySchedule();
 </script>
