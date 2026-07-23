@@ -6,366 +6,211 @@
 <title>CGTN Faroe Islands — Crew Portal</title>
 <style>
   :root{
-    --bg: #0d1117;
-    --bg-alt: #131a22;
-    --card: #161e27;
-    --card-border: #232d38;
-    --ink: #e9edf1;
-    --ink-dim: #9aa7b4;
-    --ink-faint: #63707d;
-    --accent: #3ea6c9;
-    --accent-soft: rgba(62,166,201,0.14);
-    --flag-red: #d64545;
-    --flag-red-soft: rgba(214,69,69,0.12);
-    --ok: #4caf7d;
-    --ok-soft: rgba(76,175,125,0.14);
-    --pending: #d9a441;
-    --pending-soft: rgba(217,164,65,0.14);
-    --radius: 10px;
-    --serif: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
-    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    --mono: 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+    --bg:#0b0e13;
+    --panel:#12161d;
+    --panel-2:#171c24;
+    --border:#232a35;
+    --text:#e8ecf1;
+    --muted:#8b96a5;
+    --blue:#3d7ab8;
+    --blue-soft:#1c3a52;
+    --red:#c0503f;
+    --red-soft:#3a2320;
+    --amber:#c99a4a;
+    --green:#4a9d7f;
+    --font-display: 'Georgia', 'Iowan Old Style', serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   }
-  *{ box-sizing:border-box; }
-  html,body{ margin:0; padding:0; }
+  *{box-sizing:border-box; margin:0; padding:0;}
   body{
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
     line-height:1.5;
     -webkit-font-smoothing:antialiased;
   }
-  a{ color: var(--accent); }
+  a{color:inherit;}
 
-  /* Header */
   header.top{
-    background: linear-gradient(180deg, #101820 0%, #0d1117 100%);
-    border-bottom:1px solid var(--card-border);
-    padding: 28px 20px 0 20px;
-    position: sticky;
-    top:0;
-    z-index: 50;
+    background:linear-gradient(180deg,#0f141b 0%, #0b0e13 100%);
+    border-bottom:1px solid var(--border);
+    padding:28px 20px 0 20px;
+    position:sticky; top:0; z-index:50;
   }
-  .top-inner{ max-width: 980px; margin:0 auto; }
+  .top-inner{max-width:1000px; margin:0 auto;}
   .eyebrow{
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom:8px;
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--blue); font-weight:600; margin-bottom:6px;
   }
-  h1.title{
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(26px, 4vw, 36px);
-    margin: 0 0 6px 0;
-    letter-spacing: -0.01em;
-    cursor: pointer;
-    width: fit-content;
-    transition: color .15s ease;
+  h1{
+    font-family:var(--font-display);
+    font-size:clamp(24px,4vw,34px);
+    font-weight:400;
+    letter-spacing:.01em;
+    margin-bottom:4px;
   }
-  h1.title:hover{ color: var(--accent); }
-  .subtitle{
-    color: var(--ink-dim);
-    font-size: 14px;
-    margin-bottom: 22px;
-  }
-  .subtitle strong{ color: var(--ink); font-weight:600; }
-
+  .sub{color:var(--muted); font-size:14px; margin-bottom:18px;}
+  .travel-row{margin-bottom:6px;}
+  .travel-row .card{margin-bottom:14px; padding:14px 18px;}
+  .travel-row h3{font-size:14px; text-transform:uppercase; letter-spacing:.05em; color:var(--blue); margin-bottom:8px;}
   nav.tabs{
-    display:flex;
-    gap: 4px;
-    max-width: 980px;
-    margin: 0 auto;
+    display:flex; gap:4px; overflow-x:auto; scrollbar-width:none;
   }
+  nav.tabs::-webkit-scrollbar{display:none;}
   nav.tabs button{
-    background:none;
-    border:none;
-    color: var(--ink-faint);
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight:600;
-    padding: 12px 16px;
-    cursor:pointer;
-    border-bottom: 2px solid transparent;
-    transition: color .15s ease, border-color .15s ease;
+    background:none; border:none; color:var(--muted);
+    font-family:var(--font-body); font-size:14px; font-weight:600;
+    padding:10px 16px; cursor:pointer; white-space:nowrap;
+    border-bottom:2px solid transparent;
+    transition:color .15s, border-color .15s;
   }
-  nav.tabs button:hover{ color: var(--ink); }
-  nav.tabs button.active{
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-  }
+  nav.tabs button:hover{color:var(--text);}
+  nav.tabs button.active{color:var(--text); border-bottom-color:var(--blue);}
 
-  main{
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 28px 20px 80px 20px;
-  }
-  .view{ display:none; }
-  .view.active{ display:block; }
+  main{max-width:1000px; margin:0 auto; padding:24px 20px 80px 20px;}
+  .view{display:none;}
+  .view.active{display:block;}
 
-  /* My schedule selector */
-  .picker{
-    display:flex;
-    align-items:center;
-    gap: 12px;
-    background: var(--card);
-    border:1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    margin-bottom: 24px;
+  /* ---- Overview ---- */
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media(max-width:720px){.grid-2{grid-template-columns:1fr;}}
+  .card{
+    background:var(--panel); border:1px solid var(--border);
+    border-radius:10px; padding:18px 20px; margin-bottom:16px;
   }
-  .picker label{ font-size:13px; color: var(--ink-dim); white-space:nowrap; }
-  .picker select{
-    flex:1;
-    background: var(--bg-alt);
-    color: var(--ink);
-    border:1px solid var(--card-border);
-    border-radius: 7px;
-    padding: 9px 10px;
-    font-size:14px;
-    font-family: var(--sans);
+  .card h3{
+    font-family:var(--font-display); font-weight:400; font-size:18px;
+    margin-bottom:10px; color:var(--text);
   }
+  .card p{color:#c5cdd8; font-size:14px; margin-bottom:8px;}
+  .card p:last-child{margin-bottom:0;}
+  .kv{display:flex; justify-content:space-between; gap:12px; font-size:13.5px; padding:6px 0; border-bottom:1px solid var(--border);}
+  .kv:last-child{border-bottom:none;}
+  .kv span:first-child{color:var(--muted);}
+  .kv span:last-child{text-align:right; font-weight:500;}
+  .strategy-note{
+    border-left:3px solid var(--blue); padding:10px 14px; background:var(--blue-soft);
+    border-radius:0 6px 6px 0; font-size:13.5px; color:#d6e2ee; margin-bottom:10px;
+  }
+  .strategy-note:last-child{margin-bottom:0;}
 
-  .empty-state{
-    text-align:center;
-    color: var(--ink-faint);
-    padding: 60px 20px;
-    font-size: 14px;
+  /* ---- Filter bar (My Schedule) ---- */
+  .filter-bar{
+    display:flex; align-items:center; gap:10px; margin-bottom:20px;
+    flex-wrap:wrap;
   }
+  .filter-bar label{font-size:13px; color:var(--muted); font-weight:600;}
+  select{
+    background:var(--panel-2); color:var(--text); border:1px solid var(--border);
+    border-radius:8px; padding:9px 14px; font-size:14px; font-family:var(--font-body);
+    cursor:pointer; min-width:220px;
+  }
+  select:focus{outline:1px solid var(--blue);}
 
-  /* Day sections */
-  .day{ margin-bottom: 34px; }
+  /* ---- Day / event cards ---- */
+  .day{margin-bottom:34px;}
   .day-head{
-    display:flex;
-    align-items:baseline;
-    gap: 10px;
-    margin-bottom: 12px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--card-border);
+    display:flex; align-items:baseline; gap:12px; margin-bottom:4px;
+    padding-bottom:10px; border-bottom:1px solid var(--border);
   }
-  .day-date{
-    font-family: var(--serif);
-    font-size: 20px;
-    color: var(--ink);
-  }
-  .day-focus{
-    font-size: 13px;
-    color: var(--ink-faint);
-  }
+  .day-date{font-family:var(--font-display); font-size:20px;}
+  .day-title{color:var(--amber); font-size:13.5px; font-weight:600;}
+  .day-sub{color:var(--muted); font-size:13px; margin:6px 0 16px 0;}
 
   .event{
-    background: var(--card);
-    border:1px solid var(--card-border);
-    border-left: 3px solid var(--accent);
-    border-radius: var(--radius);
-    padding: 16px 18px;
-    margin-bottom: 12px;
+    background:var(--panel); border:1px solid var(--border); border-left:3px solid var(--blue);
+    border-radius:8px; padding:16px 18px; margin-bottom:12px;
   }
-  .event.not-filmed{
-    border-left-color: var(--flag-red);
-  }
+  .event.not-filmed{border-left-color:var(--red);}
+  .event.tbc{border-left-color:var(--amber);}
   .event-top{
-    display:flex;
-    justify-content: space-between;
-    align-items:flex-start;
-    gap: 12px;
-    flex-wrap: wrap;
+    display:flex; justify-content:space-between; align-items:flex-start; gap:12px; flex-wrap:wrap;
   }
   .event-time{
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--accent);
-    white-space:nowrap;
+    font-family:var(--font-display); font-size:15px; color:var(--blue); min-width:110px; font-weight:600;
   }
-  .event-title{
-    font-size: 16px;
-    font-weight:600;
-    margin: 2px 0 6px 0;
-  }
-  .event-loc{
-    font-size: 13px;
-    color: var(--ink-dim);
-    margin-bottom: 10px;
-  }
-  .event-loc::before{ content: "📍 "; }
+  .event-main{flex:1; min-width:220px;}
+  .event-title{font-size:15.5px; font-weight:600; margin-bottom:3px;}
+  .event-loc{color:var(--muted); font-size:13px;}
+  .event-loc svg{vertical-align:-2px; margin-right:4px;}
 
   .badge{
-    display:inline-flex;
-    align-items:center;
-    gap:5px;
-    font-size: 11px;
-    font-weight:700;
-    letter-spacing:0.03em;
-    text-transform:uppercase;
-    padding: 4px 9px;
-    border-radius: 20px;
-    white-space:nowrap;
+    display:inline-flex; align-items:center; gap:5px;
+    font-size:11px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+    padding:4px 9px; border-radius:20px; white-space:nowrap;
   }
-  .badge.confirmed{ background: var(--ok-soft); color: var(--ok); }
-  .badge.pending{ background: var(--pending-soft); color: var(--pending); }
-  .badge.not-filmed{ background: var(--flag-red-soft); color: var(--flag-red); }
+  .badge.confirmed{background:rgba(74,157,127,.15); color:var(--green);}
+  .badge.tbc{background:rgba(201,154,74,.15); color:var(--amber);}
+  .badge.not-filmed{background:rgba(192,80,63,.18); color:#e08373;}
 
-  .chips{
-    display:flex;
-    flex-wrap:wrap;
-    gap: 6px;
-    margin: 10px 0;
-  }
+  .event-body{margin-top:12px; font-size:13.5px; color:#c5cdd8;}
+  .event-body p{margin-bottom:8px;}
+  .event-body p:last-child{margin-bottom:0;}
+  .event-body strong{color:var(--text);}
+
+  .chips{display:flex; flex-wrap:wrap; gap:6px; margin-top:12px;}
   .chip{
-    background: var(--accent-soft);
-    color: var(--accent);
-    font-size: 12px;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-weight:500;
+    background:var(--panel-2); border:1px solid var(--border); color:#c5cdd8;
+    font-size:12px; padding:4px 10px; border-radius:20px;
   }
-  .chip.contrib{
-    background: rgba(217,164,65,0.14);
-    color: var(--pending);
+  .chip.you{background:var(--blue-soft); border-color:var(--blue); color:#cfe0ef; font-weight:600;}
+
+  .themes{margin-top:10px; font-size:13px; color:#a9b3c1;}
+  .themes strong{color:var(--muted); font-weight:600; text-transform:uppercase; font-size:11px; letter-spacing:.05em;}
+
+  .not-filmed-flag{
+    display:flex; align-items:center; gap:8px; margin-top:10px; font-size:13px;
+    color:#e08373; font-weight:600;
   }
 
-  .event-notes{
-    font-size: 13px;
-    color: var(--ink-dim);
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px dashed var(--card-border);
+  .toggle-btn{
+    margin-top:12px; background:var(--panel-2); border:1px solid var(--border); color:var(--blue);
+    font-size:12.5px; font-weight:600; padding:7px 14px; border-radius:7px; cursor:pointer;
+    display:inline-flex; align-items:center; gap:6px;
   }
-  .event-notes ul{ margin: 4px 0 0 0; padding-left: 18px; }
-  .event-notes li{ margin-bottom: 3px; }
-  .flag-note{
-    color: var(--flag-red);
-    font-weight:600;
+  .toggle-btn:hover{border-color:var(--blue);}
+  .qa-panel{display:none; margin-top:12px; border-top:1px dashed var(--border); padding-top:12px;}
+  .qa-panel.open{display:block;}
+  .qa-note{font-size:12.5px; color:var(--amber); margin-bottom:10px; font-style:italic;}
+  .qa-item{margin-bottom:12px; font-size:13.5px;}
+  .qa-item:last-child{margin-bottom:0;}
+  .qa-en{color:var(--text); margin-bottom:2px;}
+  .qa-fo{color:var(--muted); font-style:italic;}
+  .qa-flag{margin-right:6px;}
+
+  .docs{margin-top:12px;}
+  .docs-empty{font-size:12.5px; color:var(--muted); font-style:italic;}
+  .doc-link{
+    display:inline-flex; align-items:center; gap:6px; font-size:12.5px; color:var(--blue);
+    background:var(--blue-soft); padding:5px 11px; border-radius:6px; margin-right:6px; margin-top:4px;
+    text-decoration:none;
   }
 
-  /* Questions expander */
-  details.qbox{
-    margin-top: 10px;
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    overflow:hidden;
-    background: var(--bg-alt);
-  }
-  details.qbox summary{
-    cursor:pointer;
-    list-style:none;
-    padding: 9px 14px;
-    font-size: 13px;
-    font-weight:600;
-    color: var(--accent);
-    display:flex;
-    align-items:center;
-    gap:8px;
-    user-select:none;
-  }
-  details.qbox summary::-webkit-details-marker{ display:none; }
-  details.qbox summary::before{
-    content: "▸";
-    display:inline-block;
-    transition: transform .15s ease;
-    font-size: 11px;
-  }
-  details.qbox[open] summary::before{ transform: rotate(90deg); }
-  .qlist{
-    padding: 4px 14px 14px 14px;
-    max-height: 360px;
-    overflow-y:auto;
-  }
-  .qitem{
-    padding: 10px 0;
-    border-top: 1px solid var(--card-border);
-    font-size: 13px;
-  }
-  .qitem:first-child{ border-top:none; }
-  .qitem .en{ color: var(--ink); margin-bottom:3px; }
-  .qitem .fo{ color: var(--ink-dim); font-style: italic; }
-  .qtag{ font-size:11px; opacity:0.7; margin-right:6px; }
-  .qmeta{
-    font-size: 12px;
-    color: var(--ink-faint);
-    padding: 8px 14px 0 14px;
-  }
-
-  /* Contacts */
+  /* ---- Contacts ---- */
   .contact-grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px,1fr));
-    gap: 12px;
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:14px;
   }
   .contact-card{
-    background: var(--card);
-    border:1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 16px;
-    display:flex;
-    gap: 12px;
+    background:var(--panel); border:1px solid var(--border); border-radius:10px;
+    padding:16px; display:flex; gap:12px; align-items:flex-start;
   }
   .avatar{
-    width: 42px; height:42px;
-    border-radius:50%;
-    background: var(--accent-soft);
-    color: var(--accent);
-    display:flex; align-items:center; justify-content:center;
-    font-weight:700;
-    font-size: 14px;
-    flex-shrink:0;
+    width:42px; height:42px; border-radius:50%; background:var(--blue-soft); color:#cfe0ef;
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px;
+    flex-shrink:0; border:1px solid var(--blue);
   }
-  .contact-info .name{ font-weight:600; font-size:14px; }
-  .contact-info .role{ font-size:12px; color: var(--ink-faint); margin-bottom:6px; }
-  .contact-info a, .contact-info .line{
-    display:block;
-    font-size:12.5px;
-    color: var(--ink-dim);
-    text-decoration:none;
-    margin-top:2px;
-  }
-  .contact-info a:hover{ color: var(--accent); }
+  .contact-name{font-weight:600; font-size:14.5px;}
+  .contact-role{color:var(--muted); font-size:12.5px; margin-bottom:6px;}
+  .contact-detail{font-size:12.5px; color:#c5cdd8; word-break:break-word;}
 
   .section-label{
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color: var(--ink-faint);
-    margin: 28px 0 10px 0;
+    font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted);
+    font-weight:700; margin:26px 0 12px 0;
   }
-  .section-label:first-child{ margin-top:0; }
-
-  /* Travel card */
-  .travel-grid{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-  @media (max-width: 600px){ .travel-grid{ grid-template-columns: 1fr; } }
-  .travel-card{
-    background: var(--card);
-    border:1px solid var(--card-border);
-    border-radius: var(--radius);
-    padding: 16px;
-  }
-  .travel-card h3{
-    margin:0 0 8px 0;
-    font-size: 13px;
-    color: var(--accent);
-    text-transform:uppercase;
-    letter-spacing:0.06em;
-  }
-  .travel-card .line{ font-size:13.5px; color: var(--ink-dim); margin-bottom:3px; }
-  .travel-card .line strong{ color: var(--ink); }
+  .section-label:first-child{margin-top:0;}
 
   footer{
-    text-align:center;
-    color: var(--ink-faint);
-    font-size: 12px;
-    padding: 30px 20px 50px;
-  }
-
-  @media (max-width: 600px){
-    .event-top{ flex-direction:column; }
+    text-align:center; color:var(--muted); font-size:12px; padding:30px 20px 40px;
   }
 </style>
 </head>
@@ -374,58 +219,74 @@
 <header class="top">
   <div class="top-inner">
     <div class="eyebrow">FIXER.FO · Production Portal</div>
-    <h1 class="title" id="home-link" role="button" tabindex="0" title="Go to Full Schedule">CGTN Faroe Islands</h1>
-    <div class="subtitle"><strong>25–31 July 2026</strong> · Local production partner: FIXER sp/f</div>
+    <h1>CGTN Faroe Islands</h1>
+    <div class="sub"><strong>25–31 July 2026</strong> · Local production partner: FIXER sp/f</div>
+
+    <div class="grid-2 travel-row">
+      <div class="card">
+        <h3>Arrival</h3>
+        <div class="kv"><span>25 July</span><span>Flight RC 417</span></div>
+        <div class="kv"><span>Route</span><span>London Gatwick → Vágar</span></div>
+        <div class="kv"><span>Time</span><span>12:20 – 14:35</span></div>
+      </div>
+      <div class="card">
+        <h3>Departure</h3>
+        <div class="kv"><span>31 July</span><span>Flight SK 1778</span></div>
+        <div class="kv"><span>Route</span><span>Vágar → Copenhagen, 13:25 – 16:35</span></div>
+        <div class="kv"><span>Connection</span><span>SK 1507: Copenhagen → London Heathrow, 17:30 – 18:30</span></div>
+      </div>
+    </div>
+
+    <nav class="tabs">
+      <button class="tab-btn active" data-view="schedule">Full Schedule</button>
+      <button class="tab-btn" data-view="mine">My Schedule</button>
+      <button class="tab-btn" data-view="contacts">Contacts</button>
+    </nav>
   </div>
-  <nav class="tabs">
-    <button class="tab-btn active" data-view="schedule">Full Schedule</button>
-    <button class="tab-btn" data-view="myschedule">My Schedule</button>
-    <button class="tab-btn" data-view="contacts">Contacts</button>
-  </nav>
 </header>
 
 <main>
 
   <!-- FULL SCHEDULE -->
-  <section id="view-schedule" class="view active">
-    <div class="travel-grid">
-      <div class="travel-card">
-        <h3>Arrival</h3>
-        <div class="line"><strong>25 July</strong> · Flight RC 417</div>
-        <div class="line">London Gatwick → Vágar</div>
-        <div class="line">12:20 – 14:35</div>
-      </div>
-      <div class="travel-card">
-        <h3>Departure</h3>
-        <div class="line"><strong>31 July</strong> · Flight SK 1778</div>
-        <div class="line">Vágar → Copenhagen, 13:25 – 16:35</div>
-        <div class="line">Connection SK 1507: Copenhagen → London Heathrow, 17:30 – 18:30</div>
-      </div>
+  <section class="view active" id="view-schedule">
+    <div class="card">
+      <h3>Production summary</h3>
+      <p>This production explores the relationship between the Faroe Islands and the sea — fishing, food culture, identity, language, environmental pressure and the islands' political and cultural position. The shoot combines human stories, expert interviews, government perspective, Ólavsøka coverage and visual material from across the islands.</p>
     </div>
-    <div id="schedule-days"></div>
+    <div class="card">
+      <h3>Production strategy</h3>
+      <div class="strategy-note">Main interviews are scheduled around Ólavsøka. 28–29 July are the Faroese national holiday days, used mainly for atmosphere, national identity, music, rowing, public events and B-roll.</div>
+      <div class="strategy-note">The government interview is set for Monday 27 July, since 26 July is a Sunday.</div>
+      <div class="strategy-note">Not permitted for filming: the Ólavsøka church service at Havnar Kirkja, and the Opening of the Parliamentary Year at Tinganes — flagged in red on the schedule below.</div>
+    </div>
+    <div class="card">
+      <h3>Priority elements</h3>
+      <p><strong>Must have:</strong> Pál Weihe interview · Environmental / climate interview · Fishing family · Government interview · Ólavsøka &amp; B-roll · Language and identity interview · Tunnel / undersea roundabout PTC · Strong Faroese visual material.</p>
+      <p><strong>Should have:</strong> Kallsoy grandson on the boat (confirmed) · Boat access (confirmed) · Drone footage · Ólavsøka choir · Faroese chain dance if accessible · Vox pops · Harbour &amp; coastal scenes.</p>
+      <p><strong>To decide:</strong> Exact questions per contributor · Boat interview vs. boat B-roll · Drone permissions &amp; locations · Tunnel filming details · Final pickup points &amp; call sheets.</p>
+    </div>
+    <div id="schedule-full"></div>
   </section>
 
   <!-- MY SCHEDULE -->
-  <section id="view-myschedule" class="view">
-    <div class="picker">
-      <label for="name-select">I am:</label>
-      <select id="name-select">
-        <option value="">Select your name…</option>
-      </select>
+  <section class="view" id="view-mine">
+    <div class="filter-bar">
+      <label for="who">I am:</label>
+      <select id="who"></select>
     </div>
-    <div id="myschedule-days"></div>
+    <div id="schedule-mine"></div>
   </section>
 
   <!-- CONTACTS -->
-  <section id="view-contacts" class="view">
+  <section class="view" id="view-contacts">
     <div class="section-label">CGTN Crew</div>
     <div class="contact-grid" id="contacts-crew"></div>
     <div class="section-label">Local Production</div>
     <div class="contact-grid" id="contacts-local"></div>
     <div class="section-label">Contributors &amp; Contacts</div>
-    <div class="contact-grid" id="contacts-contrib"></div>
+    <div class="contact-grid" id="contacts-contributors"></div>
     <div class="section-label">Government / Press</div>
-    <div class="contact-grid" id="contacts-gov"></div>
+    <div class="contact-grid" id="contacts-government"></div>
   </section>
 
 </main>
@@ -433,357 +294,363 @@
 <footer>FIXER.FO — CGTN Faroe Islands crew portal · Last updated from production brief</footer>
 
 <script>
-/* ---------------- DATA ---------------- */
+/* ============ DATA ============ */
 
-const CORE = ["Michael Koba","Jeff Moody","Steve A","John B"];
+const CORE = ["Michael Koba","Rhys Lennon","Jeff Moody","Steve A","John B"];
+
+const QA = {
+  palweihe: {
+    note: "Pál would like to receive questions in advance if possible.",
+    items: [
+      ["When did you first realize there might be a problem with eating pilot whale meat?","Nær var tað fyrstu ferð, tú gjørdist varugur við, at tað kundi vera ein trupulleiki at eta grindahvalakjøt?"],
+      ["How did you then get funding for your research?","Hvussu eydnaðist tær síðani at fáa fígging til granskingina?"],
+      ["You released a report in 2008. What were your findings?","Í 2008 almannakunngjørdi tú eina frágreiðing. Hvat vóru týdningarmestu úrslitini?"],
+      ["You had to tell Faroese people they should no longer eat their traditional food. How did you prepare that message, and how was it received?","Tú mátti siga við føroyingar, at teir ikki longur áttu at eta ein mat sum hevur verið partur av mentanini í øldir. Hvussu fyrireikaði tú boðskapin, og hvussu varð hann móttikin fyrstu ferð?"],
+      ["You were seen by some as unpatriotic. How hard was that for you?","Summi hildu, at tú vart óføðurlandskendur. Hvussu tungt var tað hjá tær persónliga?"],
+      ["Women have taken your message to heart, but many men still say they won't stop. How difficult has it been to reach men?","Nógvar kvinnur hava tikið boðskapin til sín. Men nógv menn siga framvegis at teir ikki steðga. Hvussu trupult hevur tað verið at røkka monnum?"],
+      ["How successful do you feel your campaign has been?","Hvussu væl heldur tú, at arbeiðið hevur eydnast?"],
+      ["Explain the term \"Arctic dilemma\".","Kanst tú greiða frá, hvat hugtakið \"Arctic Dilemma\" merkir?"],
+      ["The Stockholm Convention obliges countries to eliminate PCBs by 2025. How successful has this been?","Stockholm-sáttmálin áleggur londum at beina burtur PCB. Hvussu væl heldur tú, at hetta arbeiðið hevur eydnast?"],
+      ["Your campaign came as the anti-whaling movement grew louder. How did this affect your work?","Títt arbeiði kom samstundis sum altjóða mótstøðan móti grindadrápi vaks. Hvussu ávirkaði tað títt arbeiði?"],
+      ["What are your thoughts now on the Grind?","Hvussu metir tú um grindadrápið í Føroyum í dag?"],
+      ["What more would you like other countries to do to prevent contamination?","Hvat ynskir tú, at onnur lond gera meira av fyri at minka um dálkingina?"],
+      ["How do you see the future of whaling in the Faroes?","Hvussu sært tú framtíðina hjá grindadrápinum?"],
+      ["Should it be banned?","Heldur tú, at grindadráp eigur at verða bannað?"]
+    ]
+  },
+  annika: {
+    note: "Questions need to be sent in advance.",
+    items: [
+      ["Sea temperatures around the Faroes have risen for decades. What effect has that had on marine life?","Havhitin kring Føroyar er hækkaður seinastu áratíggjuni. Hvørja ávirkan hevur tað havt á lívið í havinum?"],
+      ["It's had an effect on birds too — tell me more.","Hetta hevur eisini ávirkað fuglalívið. Kanst tú greiða nærri frá tí?"],
+      ["How is this impacting Faroese people?","Hvussu ávirkar hetta føroyingar og føroyska samfelagið?"],
+      ["Salmon farming has improved lives here but brings dangers too — sea lice, escaped farmed salmon. Talk us through the main issues.","Alivinnan hevur havt stóran týdning, men hon hevur eisini avbjóðingar, eitt nú laksalús og alifiski sum sleppur út."],
+      ["Pollutants are a huge issue now. What are you finding?","Dálking er vorðin ein vaksandi trupulleiki. Hvat síggja tit í tykkara arbeiði?"],
+      ["The world's litter and pollution washes up on Faroese shores. How does that make you feel?","Rusk og dálking úr øllum heiminum reka upp á føroysku strendurnar. Hvussu kennist tað?"],
+      ["Tell me about Rudda Føroyar — how did it start, and what are its goals?","Greið frá Rudda Føroyum. Hvussu byrjaði átakið, og hvørji eru málini?"],
+      ["What is the Faroese government doing to help, and what more should they do?","Hvat gera myndugleikarnir fyri at bøta um støðuna, og hvat kundu teir gjørt betur?"],
+      ["What would you like world governments to do?","Hvat ynskir tú, at stjórnir kring heimin gera?"],
+      ["What more can Faroese people do?","Hvat kunnu vit sjálvi gera fyri at gera mun?"],
+      ["What are your hopes — and your fears if nothing changes?","Hvat gevur tær vón — og hvat óttast tú um einki broytist?"]
+    ]
+  },
+  kallsoy: {
+    note: "Jenny and Sonni speak Faroese only — questions should be prepared in advance.",
+    items: [
+      ["How long have you been fishing these waters, and what do you enjoy about it?","Hvussu leingi hava tit fiskað á hesum leiðum, og hvat dáma tit best við hesum lívinum?"],
+      ["It must have been a hard way of life — how bad can things get?","Hetta man hava verið eitt hart lív. Kanst tú greiða frá, hvussu strævið kann vera?"],
+      ["Storms are getting stronger and more frequent — how does this impact fishermen?","Ódnirnar gerast sterkari og oftari. Hvussu ávirkar tað fiskimenn?"],
+      ["It's a struggle to persuade the next generation to carry on — how hard has that been for your own family?","Trupult er at fáa næstu ættarliðini at halda fram. Hvussu hevur tað verið hjá tykkum?"],
+      ["Many youngsters choose Tórshavn or Copenhagen instead — how big a problem is this?","Nógv ung velja Tórshavn ella Keypmannahavn. Hvussu stór avbjóðing er hetta?"],
+      ["If traditional fishing stopped, what would the Faroes lose?","Um tann siðbundni fiskiskapurin hvarv, hvat høvdu Føroyar mist?"],
+      ["Is the government doing enough to keep people in the small villages?","Ger myndugleikin nóg mikið fyri at halda lívi í smáu bygdunum?"],
+      ["This is a very isolated life — what do you like about it, and what are the problems?","Hetta er eitt avbyrgt lív. Hvat dámar tykkum, og hvørjar avbjóðingar fylgja við?"],
+      ["How do you think Faroese life will change in the coming decades?","Hvussu heldur tú, at lívið í Føroyum fer at broytast?"],
+      ["Why do people stay in such a harsh environment — what's the Faroese character that keeps them here?","Hví velja fólk framvegis at búgva her? Hvat eyðkennir føroyska sinnið?"]
+    ]
+  },
+  beinir: {
+    note: "The document describes the interview themes but not final questions — these have been drafted from the stated topics. The climate change question has been removed for this contributor.",
+    items: [
+      ["The Faroe Islands have a unique relationship with Denmark. How would you describe that relationship today?","Føroyar hava eitt serligt samband við Danmark. Hvussu vildi tú lýst hetta sambandið í dag?"],
+      ["The Faroe Islands are outside the EU. What opportunities and challenges does that create?","Føroyar standa uttan fyri ES. Hvørjir fyrimunir og avbjóðingar gevur tað?"],
+      ["The North Atlantic has become strategically important again. What role do the Faroe Islands play today?","Norðuratlantshavið hevur aftur fingið stóran týdning. Hvønn leiklut spæla Føroyar?"],
+      ["How important are Faroese language and culture to the future of the nation?","Hvussu týdningarmikil eru málið og mentanin fyri framtíðina?"],
+      ["Many young Faroese study abroad — what is government doing to bring them home?","Nógv ung fara uttanlands at lesa. Hvat ger landsstýrið fyri at fáa teir heim aftur?"],
+      ["What is your vision for the Faroe Islands over the next 20–30 years?","Hvør er tín framtíðarvisjón fyri Føroyar tey komandi árini?"]
+    ]
+  },
+  eidesgaard: {
+    note: "Questions are prepared; the Faroese versions are listed here for the portal.",
+    items: [
+      ["The Faroes have changed enormously during your lifetime — what's been the biggest transformation?","Hvat heldur tú hevur verið tann størsta broytingin í tíni lívstíð?"],
+      ["Is the ocean changing in ways that worry you?","Broytist havið nú á ein hátt, sum ger teg stúrin?"],
+      ["Are fishermen telling you stocks or migration are different from when you were younger?","Hoyrir tú frá fiskimonnum, at fiskastovnarnir eru øðrvísi nú enn, tá tú vart yngri?"],
+      ["Can the Faroes keep relying so heavily on the sea as climate changes?","Kunnu Føroyar halda fram at vera so bundnar at havinum?"],
+      ["Is climate change simply the next challenge, or fundamentally different?","Eru veðurlagsbroytingarnar bara næsta avbjóðingin, ella grundleggjandi øðrvísi?"],
+      ["How do you balance salmon farming's prosperity with protecting the fjords?","Hvussu finnur man javnvágina millum búskaparligan vøkstur og verju av firðunum?"],
+      ["Do you think the Faroes have found that balance yet?","Heldur tú, at Føroyar hava funnið ta røttu javnvágina enn?"],
+      ["How does renewed North Atlantic geopolitics affect a small nation like the Faroes?","Hvussu ávirkar tað eitt lítið land sum Føroyar?"],
+      ["How do you stay close to Europe, the UK and Denmark without being caught between larger powers?","Hvussu kunnu Føroyar varðveita gott samband uttan at koma í klemmu?"],
+      ["What worries you most about the future for young Faroese?","Hvat stúrir tú mest fyri, tá tú hugsar um ungar føroyingar?"],
+      ["Do enough young people return after studying abroad?","Koma nóg mong ung heim aftur eftir lestur uttanlands?"],
+      ["What kind of Faroe Islands do you hope your grandchildren inherit?","Hvørjar Føroyar vónar tú, at abbabørnini fara at arva?"],
+      ["Standing on a cliff looking at the Atlantic — what do visitors often miss?","Tá tú stendur á einum bergi og hyggur út yvir havið, hvat síggja vitjandi ofta ikki?"],
+      ["What gives you hope?","Hvat gevur tær vón fyri framtíðina?"]
+    ]
+  },
+  susanna: {
+    note: "No fixed question list — Jeff prefers to talk around key themes: the Faroe Islands Translate project and the Sheep View project (how the ideas came about, how they worked in practice, and how successful they've been).",
+    items: []
+  },
+  niels: {
+    note: "Questions have been sent to Niels Winher in advance.",
+    items: [
+      ["How important is salmon farming to the Faroese economy today?","Hvussu týdningarmikil er alivinnan fyri føroyska búskapin í dag?"],
+      ["How many jobs does the industry support, directly and indirectly?","Hvussu nógv arbeiðspláss skapar alivinnan, bæði beinleiðis og óbeinleiðis?"],
+      ["What would happen to the Faroe Islands if salmon farming declined significantly?","Hvat hevði tað merkt fyri Føroyar, um alivinnan minkaði munandi?"],
+      ["What are you doing differently from Scotland or Norway?","Hvat gera Føroyar øðrvísi enn til dømis Skotland og Noreg?"],
+      ["How do you balance economic growth with protecting the marine environment?","Hvussu verður javnvág skapt millum búskaparligan vøkstur og verjuna av havumhvørvinum?"],
+      ["What lessons could other salmon-producing nations learn from the Faroese model?","Hvat kunnu onnur alilond læra av føroyska leistinum?"]
+    ]
+  }
+};
+
+const DAYS = [
+  {
+    date: "Saturday 25 July", title: "Arrival & Pál Weihe interview",
+    sub: "Main focus: arrival, transfer and evening interview.",
+    events: [
+      { time:"Afternoon", title:"Crew arrival & transfer", location:"Vágar Airport → accommodation", people:[...CORE], status:"confirmed",
+        note:"Airport pickup and transfer to accommodation. Short production briefing if timing allows." },
+      { time:"18:00–19:00", title:"Interview: Professor Pál Weihe", location:"Proposed: Gamla Hoyvík (outdoors, near Mannbrekka) — location to be confirmed with Pál", people:[...CORE,"Pál Weihe"], status:"confirmed", contributor:"palweihe",
+        themes:["Pollutants in pilot whale meat"],
+        note:"Outdoor location gives a strong sea background and a clear link to the story. Pál would like questions in advance. To decide: film at Gamla Hoyvík vs. at his home." }
+    ]
+  },
+  {
+    date:"Sunday 26 July", title:"Environmental story & fishing family",
+    sub:"Morning environmental interview, afternoon with the Kallsoy fishing family in Eiði.",
+    events:[
+      { time:"08:30 pickup · 09:00–12:00", title:"Interview: Annika Arnsteinsdóttir (Rudda Føroyar)", location:"Hugskotið, Eystara Bryggja — outdoor location + boat pickup", people:[...CORE,"Annika Arnsteinsdóttir"], status:"confirmed", contributor:"annika",
+        themes:["Changes in the North Atlantic","Marine environmental pressure","Sea temperature & fish migration","Salmon farming","Coastal cleanup & pollution"],
+        note:"To decide: if the interview happens on a boat, this must be agreed and budgeted separately. Questions to be sent in advance." },
+      { time:"Depart 14:00 · Eiði 14:45 · Shoot 15:00–19:00 · Return 19:15", title:"Fishing family: Jenny & Sonni Kallsoy", location:"Eiði", people:[...CORE,"Jenny Kallsoy","Sonni Kallsoy"], status:"confirmed", contributor:"kallsoy",
+        note:"Retired couple in their 70s still fishing their own small boat. Grandson confirmed to join. Possible scenes: family interview, harbour scenes, small boat, fishing gear, older + next generation. They speak Faroese only." }
+    ]
+  },
+  {
+    date:"Monday 27 July", title:"Language, identity & government",
+    sub:"Government interview set for Monday since Sunday is unavailable.",
+    events:[
+      { time:"07:45 pickup · 08:00–09:00", title:"Interview: Súsanna Sørensen", location:"Visit Faroe Islands office, Tinganes, Tórshavn", people:[...CORE,"Súsanna Sørensen"], status:"confirmed", contributor:"susanna",
+        themes:["Faroese language & identity","Google Translate","Small languages & technology","Tourism & international attention"],
+        note:"May be filmed outside if weather allows; otherwise indoors with the harbour visible in the background." },
+      { time:"10:30–11:00 · wrap ~11:15", title:"Government interview: Beinir Johannesen, Prime Minister", location:"Government offices, Tinganes", people:[...CORE,"Beinir Johannesen","Bjarni Arge"], status:"confirmed", contributor:"beinir",
+        themes:["Relationship with Denmark","Faroes outside the EU","North Atlantic geopolitics","Language & culture","Young people staying in the Faroes","The future of the islands"],
+        note:"Formal interior interview — can move outdoors if it gets too dark inside. Important: the climate change question has been removed for this contributor. Press contact: Bjarni Arge." },
+      { time:"15:00", title:"Interview: Jóannes Eidesgaard (former Prime Minister)", location:"Skansin, Tórshavn", people:[...CORE,"Jóannes Eidesgaard"], status:"confirmed", contributor:"eidesgaard",
+        themes:["Faroese society & politics","Relationship with Denmark","Faroes outside the EU","Geopolitics","Fishing, sovereignty & identity"],
+        note:"Former leader of Javnaðarflokkurin, now political commentator. Faroese-language questions listed in the expand panel." }
+    ]
+  },
+  {
+    date:"Tuesday 28 July", title:"Ólavsøka — opening & rowing",
+    sub:"National holiday atmosphere, official opening, rowing and visual coverage. No heavy sit-down interviews planned — Tórshavn will be very busy, movement and access must be planned carefully.",
+    events:[
+      { time:"13:00–18:30", title:"Ólavsøka rowing", location:"Tórshavn harbour", people:[...CORE], status:"confirmed",
+        note:"Possible scenes: crowds, flags, families, harbour B-roll, street life, piece to camera with Jeff, short vox pops." },
+      { time:"~14:00–15:00", title:"Official Ólavsøka opening, procession & ceremony", location:"Vaglið, Tórshavn", people:[...CORE], status:"confirmed",
+        note:"People in national dress, sports people and horses in the procession. Exact 2026 programme to be checked again closer to the shoot." },
+      { time:"~15:00", title:"Main rowing competition", location:"Tórshavn harbour", people:[...CORE], status:"confirmed" }
+    ]
+  },
+  {
+    date:"Wednesday 29 July", title:"Ólavsøka — church, parliament & B-roll",
+    sub:"National day ceremonies, culture, music, national dress and B-roll. Pickup 10:00.",
+    events:[
+      { time:"~10:45", title:"Procession: Parliament → Havnar Kirkja", location:"Tinganes → Havnar Kirkja", people:[...CORE], status:"confirmed",
+        note:"Members of Parliament, clergy and officials walk to the church." },
+      { time:"11:00–12:00", title:"Ólavsøka church service", location:"Havnar Kirkja", people:[...CORE], status:"not-filmed",
+        note:"We should not plan to film inside the church service." },
+      { time:"~12:00", title:"Procession returns", location:"Havnar Kirkja → Parliament", people:[...CORE], status:"confirmed" },
+      { time:"~12:00–13:30", title:"Opening of the Parliamentary Year", location:"Tinganes", people:[...CORE], status:"not-filmed",
+        note:"Prime Minister's speech and official proceedings — we do not have access to film inside." },
+      { time:"Afternoon", title:"Cultural B-roll / landscape B-roll", location:"Tórshavn or countryside (depending on access)", people:[...CORE], status:"tbc",
+        note:"If we are not filming the festivities in Tórshavn, recommend filming landscape B-roll instead. Possible: national dress details, choir, brass band, chain dance (timing/access/light/sound to be confirmed before locking into the call sheet)." }
+    ]
+  },
+  {
+    date:"Thursday 30 July", title:"Tunnel PTC, drone & final pickups",
+    sub:"Final full shoot day — flexible, used to complete the visual story.",
+    events:[
+      { time:"13:00–14:30", title:"Interview: Uni Danielsen (Tunnil.fo)", location:"Runavík office, or Eysturoyartunnilin entrance, Streymoy side", people:[...CORE,"Uni Danielsen"], status:"tbc", contributor:"uni",
+        themes:["Tunnel architecture","Economic significance of the undersea tunnels"],
+        note:"Awaiting specific themes and questions from Jeff — not yet finalised." },
+      { time:"15:00–16:00", title:"Interview: Niels Winher, CEO Chamber of Commerce", location:"Inside or outside the House of Industry", people:[...CORE,"Niels Winher"], status:"confirmed", contributor:"niels",
+        themes:["The salmon industry"],
+        note:"Full question list (English + Faroese) has been sent to Niels — see expand panel." },
+      { time:"Rest of day", title:"Drone, coastal B-roll & final missing shots", location:"Tunnel / undersea roundabout, waterfalls, seascapes, harbours, mountain roads, villages", people:[...CORE], status:"tbc",
+        note:"Drone footage if weather and permissions allow." }
+    ]
+  },
+  {
+    date:"Friday 31 July", title:"Departure",
+    sub:"Wrap and departure — no formal filming planned unless agreed in advance.",
+    events:[
+      { time:"Morning", title:"Hotel pickup & airport transfer", location:"Vágar Airport", people:[...CORE], status:"confirmed" },
+      { time:"13:25–16:35", title:"Flight: Vágar → Copenhagen (SK 1778)", location:"Vágar Airport", people:[...CORE], status:"confirmed" },
+      { time:"17:30–18:30", title:"Connection: Copenhagen → London Heathrow (SK 1507)", location:"Copenhagen Airport", people:[...CORE], status:"confirmed" }
+    ]
+  }
+];
 
 const CONTACTS = {
   crew: [
-    { name:"Rhys Lennon", role:"Client contact, CGTN (not travelling — remote contact)" },
-    { name:"Jeff Moody", role:"Correspondent / anchor" },
-    { name:"Steve A", role:"Camera operator" },
-    { name:"John B", role:"Camera operator" },
+    {name:"Rhys Lennon", role:"Client contact", org:"CGTN"},
+    {name:"Jeff Moody", role:"Correspondent / Anchor", org:"CGTN"},
+    {name:"Steve A", role:"Camera operator", org:"CGTN"},
+    {name:"John B", role:"Camera operator", org:"CGTN"}
   ],
   local: [
-    { name:"Michael Koba", role:"Local producer / fixer / driver, FIXER sp/f" },
+    {name:"Michael Koba", role:"Local producer / fixer / driver", org:"FIXER sp/f"}
   ],
-  contrib: [
-    { name:"Professor Pál Weihe", role:"Whale meat research", email:"palweihe@gmail.com", phone:"+298 216696" },
-    { name:"Annika Arnsteinsdóttir", role:"Rudda Føroyar — environment", email:"annika.a.nielsen@gmail.com", phone:"+298 580630" },
-    { name:"Jenny Kallsoy", role:"Fishing family, Eiði", phone:"+298 213434" },
-    { name:"Súsanna Sørensen", role:"Visit Faroe Islands", email:"susannas@visitfaroeislands.com", phone:"+298 556138" },
-    { name:"Jóannes Eidesgaard", role:"Former Prime Minister", email:"joanneseidesgaard@gmail.com", phone:"+298 599800" },
-    { name:"Uni Danielsen", role:"CEO, Tunnil.fo (undersea tunnels)" },
-    { name:"Niels Winher", role:"CEO, Chamber of Commerce", email:"niels@industry.fo", phone:"+298 739906" },
+  contributors: [
+    {name:"Professor Pál Weihe", role:"Whale meat research", email:"palweihe@gmail.com", phone:"+298 216696"},
+    {name:"Annika Arnsteinsdóttir", role:"Rudda Føroyar", email:"annika.a.nielsen@gmail.com", phone:"+298 580630"},
+    {name:"Jenny Kallsoy", role:"Fishing family (with Sonni)", phone:"+298 213434"},
+    {name:"Súsanna Sørensen", role:"Visit Faroe Islands", email:"susannas@visitfaroeislands.com", phone:"+298 556138"},
+    {name:"Jóannes Eidesgaard", role:"Former Prime Minister", email:"joanneseidesgaard@gmail.com", phone:"+298 599800"},
+    {name:"Uni Danielsen", role:"Tunnil.fo — awaiting themes from Jeff"},
+    {name:"Niels Winher", role:"CEO, Chamber of Commerce"}
   ],
-  gov: [
-    { name:"Beinir Johannesen", role:"Prime Minister of the Faroe Islands" },
-    { name:"Bjarni Arge", role:"Press contact, Prime Minister's Office", email:"bjarnia@tinganes.fo", phone:"+298 262109" },
+  government: [
+    {name:"Beinir Johannesen", role:"Prime Minister of the Faroe Islands"},
+    {name:"Bjarni Arge", role:"Press contact, Prime Minister's Office", email:"bjarnia@tinganes.fo", phone:"+298 262109"}
   ]
 };
 
-// Questions: [ {en, fo} ]
-const Q_PAL = [
-["When did you first realize there might be a problem with eating pilot whale meat?","Nær var tað fyrstu ferð, tú gjørdist varugur við, at tað kundi vera ein trupulleiki at eta grindahvalakjøt?"],
-["How did you then get funding for your research?","Hvussu eydnaðist tær síðani at fáa fígging til granskingina?"],
-["You released a report in 2008. What were your findings?","Í 2008 almannakunngjørdi tú eina frágreiðing. Hvat vóru týdningarmestu úrslitini?"],
-["You had to go out and tell Faroese people they should no longer eat their traditional food. How did you prepare that message, and how was it initially received?","Tú mátti siga við føroyingar, at teir ikki longur áttu at eta ein mat, sum hevur verið partur av føroysku matmentanini í øldir. Hvussu fyrireikaði tú hendan boðskapin, og hvussu varð hann móttikin fyrstu ferð?"],
-["You were seen by some as being unpatriotic. How hard was that for you?","Summi hildu, at tú vart óføðurlandskendur. Hvussu tungt var tað hjá tær persónliga?"],
-["Women have taken your message to heart, but many men still say they won't stop eating whale meat. How difficult has it been to reach men with the message?","Nógvar kvinnur hava tikið boðskapin til sín. Men nógv menn siga framvegis, at teir ikki fara at broyta seg. Hvussu trupult hevur tað verið at røkka hesum boðskapinum til menn?"],
-["How successful do you feel your campaign has been?","Hvussu væl heldur tú, at arbeiðið við at upplýsa um heilsuvandan hevur eydnast?"],
-["Explain the term \"Arctic dilemma.\"","Kanst tú greiða frá, hvat hugtakið \"Arctic Dilemma\" merkir?"],
-["The Stockholm Convention obliges countries to eliminate PCBs by 2025. How successful has this been?","Stockholm-sáttmálin áleggur londum at beina burtur PCB. Hvussu væl heldur tú, at hetta arbeiðið hevur eydnast?"],
-["Your campaign came as the anti-whaling movement was growing louder. How did this affect your work?","Títt arbeiði kom samstundis sum altjóða mótstøðan móti grindadrápi vaks. Hvussu ávirkaði tað títt arbeiði?"],
-["What are your thoughts now on the Grind?","Hvussu metir tú um grindadrápið í Føroyum í dag?"],
-["What more would you like other countries to do to prevent contamination?","Hvat ynskir tú, at onnur lond gera meira av fyri at minka um dálkingina í heiminum?"],
-["How do you see the future of whaling in the Faroes?","Hvussu sært tú framtíðina hjá grindadrápinum í Føroyum?"],
-["Should it be banned?","Heldur tú, at grindadráp eigur at verða bannað?"],
-];
+/* ============ RENDER ============ */
 
-const Q_ANNIKA = [
-["Sea temperatures around the Faroes have risen. What effect has that had on marine life?","Havhitin kring Føroyar er hækkaður. Hvørja ávirkan hevur tað havt á lívið í havinum?"],
-["It's had an effect on birds too — tell me more.","Hetta hevur eisini ávirkað fuglalívið. Kanst tú greiða nærri frá tí?"],
-["How is this impacting Faroese people?","Hvussu ávirkar hetta føroyingar og føroyska samfelagið?"],
-["Salmon farming has been hugely successful, but there are dangers too — sea lice, escaped farmed salmon. Talk us through some of the main issues.","Alivinnan hevur havt stóran týdning, men hon hevur eisini avbjóðingar, eitt nú laksalús og alifiski sum sleppur út. Kanst tú greiða frá?"],
-["Pollutants are a huge issue now — what are you finding?","Dálking er vorðin ein vaksandi trupulleiki. Hvat síggja tit í tykkara arbeiði?"],
-["The world's litter and pollution is washing up on Faroese shores. How does that make you feel?","Rusk og dálking úr øllum heiminum reka upp á føroysku strendurnar. Hvussu kennist tað?"],
-["Tell me about Rudda Føroyar — how did it start, and what are its goals?","Greið frá Rudda Føroyum. Hvussu byrjaði átakið, og hvørji eru málini?"],
-["What is the Faroese Government doing to help? What more should they do?","Hvat gera føroysku myndugleikarnir, og hvat kundu teir gjørt betur?"],
-["What would you like world governments to do to help?","Hvat ynskir tú, at stjórnir kring heimin gera fyri at bøta um støðuna?"],
-["What more can Faroese people do themselves?","Hvat kunnu vit føroyingar sjálvi gera fyri at gera mun?"],
-["What are your hopes for the future?","Hvat gevur tær vón fyri framtíðina?"],
-["What are your fears if nothing changes?","Hvat óttast tú mest, um einki broytist?"],
-];
-
-const Q_KALLSOY = [
-["How long have you been fishing these waters, and what do you enjoy about it?","Hvussu leingi hava tit fiskað á hesum leiðum, og hvat dáma tit best við hesum lívinum?"],
-["It must have been a hard way of life. Give me an idea of how bad things can get.","Hetta man hava verið eitt hart lív. Kanst tú greiða frá, hvussu strævið kann vera?"],
-["The weather in the Faroes is changing — more frequent, stronger storms. How is this impacting fishermen?","Veðrið í Føroyum broytist, og ódnirnar gerast sterkari og oftari. Hvussu ávirkar tað fiskimenn?"],
-["This way of life has gone on for centuries, but it's a struggle to persuade the next generation to carry on. How hard has it been with your own family?","Hesin lívshátturin hevur verið partur av Føroyum í øldir, men trupult at fáa næstu ættarlið at halda fram. Hvussu hevur tað verið hjá tykkum?"],
-["Many youngsters turn their back on this life for Tórshavn or Copenhagen. How much of a problem is this?","Nógv ung velja eitt annað lív aðrastaðni. Hvussu stór avbjóðing er hetta fyri smáu bygdirnar?"],
-["If traditional fishing stopped, what would the Faroes lose?","Um tann siðbundni fiskiskapurin hvarv, hvat høvdu Føroyar mist?"],
-["Is the government doing enough to keep people on the islands?","Heldur tú, at myndugleikarnir gera nóg nógv fyri at halda lívi í smáu bygdunum?"],
-["This is a very isolated life. What do you like about it, and what problems come with living so remotely?","Hetta er eitt lív, har tit búgva avbyrgd. Hvat dámar tykkum best, og hvørjar avbjóðingar fylgja við?"],
-["How do you think Faroese life will change in the coming years and decades?","Hvussu heldur tú, at lívið í Føroyum fer at broytast komandi árini?"],
-["Why do people stay here, despite the harsh environment? What is it about the Faroese character?","Hví velja fólk framvegis at búgva her? Hvat eyðkennir føroyska sinnið?"],
-];
-
-const Q_SUSANNA = [
-["What do you know of the origins of the Faroese language?","Kanst tú greiða frá upprunanum hjá føroyska málinum?"],
-["It was a language forbidden by Denmark. How did people keep it alive?","Føroyskt hevði eina tíð ikki pláss sum almennt mál. Hvussu eydnaðist tað føroyingum at varðveita málið?"],
-["Faroese people have had to invent names for modern things like computers. What names did they choose, and why?","Seinastu áratíggjuni hevur føroyskt fingið nýggj orð fyri nútíðar fyribrigdi. Hvussu verða slík orð skapt?"],
-["Tell me about recent efforts to ensure the Faroese language survives, including Google Translate.","Greið frá arbeiðinum at tryggja føroyska málinum eina framtíð, eitt nú við Google Translate."],
-["What does the Faroese language tell you about the Faroese people, and how does it shape identity?","Hvat sigur føroyska málið tær um føroyska fólkið, og hvønn leiklut hevur málið í samleikanum?"],
-["Are there Faroese words or expressions too uniquely Faroese to translate into English?","Eru nøkur føroysk orð ella orðatøk, sum eru serliga trupul at umseta til enskt?"],
-];
-
-const Q_BEINIR = [
-["The Faroe Islands have a unique relationship with Denmark. How would you describe that relationship today?","Føroyar hava eitt serligt samband við Danmark. Hvussu vildi tú lýst hetta sambandið í dag?"],
-["The Faroe Islands are outside the EU. What opportunities and challenges does that create?","Føroyar standa uttan fyri Evropeiska Samveldið. Hvørjir fyrimunir og avbjóðingar gevur tað?"],
-["The North Atlantic has become strategically important again. What role do the Faroes play today?","Norðuratlantshavið hevur aftur fingið stóran strategiskan týdning. Hvønn leiklut spæla Føroyar?"],
-["How important are Faroese language and culture to the nation's future?","Hvussu týdningarmikil eru føroyska málið og mentanin fyri framtíðina?"],
-["Many young Faroese study abroad. What is the government doing to encourage them home?","Nógv ung fara uttanlands at lesa. Hvat ger landsstýrið fyri at eggja teimum heim aftur?"],
-["What is your vision for the Faroe Islands over the next twenty to thirty years?","Hvør er tín framtíðarvisjón fyri Føroyar tey komandi tjúgu til tretivu árini?"],
-];
-
-const Q_JOANNES = [
-["The Faroe Islands have changed enormously during your lifetime. What's been the biggest transformation?","Føroyar hava broytt seg ómetaliga nógv í tíni lívstíð. Hvat heldur tú hevur verið tann størsta broytingin?"],
-["The ocean has always sustained the Faroes — is it changing in ways that worry you?","Havið hevur altíð verið lívsgrundarlagið undir Føroyum. Broytist tað nú á ein hátt, sum ger teg stúrin?"],
-["Are fishermen telling you fish stocks or migration patterns differ from when you were younger?","Hoyrir tú frá fiskimonnum, at fiskastovnarnir eru øðrvísi nú enn, tá tú vart yngri?"],
-["Can the Faroes continue to rely so heavily on the sea as the climate changes?","Kunnu Føroyar halda fram at vera so nógv bundnar at havinum, samstundis sum veðurlagið broytist?"],
-["Is climate change simply the next challenge, or fundamentally different from anything your generation has faced?","Eru veðurlagsbroytingarnar bara næsta avbjóðingin, ella eru tær grundleggjandi øðrvísi?"],
-["Salmon farming has brought prosperity but also criticism. How do you balance growth with protecting the fjords?","Alivinnan hevur skapt stór virði, men fingið atfinningar. Hvussu finnur man javnvágina?"],
-["Do you think the Faroes have found that balance yet?","Heldur tú, at Føroyar hava funnið ta røttu javnvágina enn?"],
-["How does the North Atlantic's renewed strategic importance affect a small nation like the Faroes?","Hvussu ávirkar Norðuratlantshavsins nýggja strategiska týdning eitt lítið land sum Føroyar?"],
-["How do you maintain close relations with Europe, the UK and Denmark without being caught between larger powers?","Hvussu kunnu Føroyar varðveita gott samband við Evropa, Bretland og Danmark uttan at koma í klemmu?"],
-["What worries you most about the future for young Faroese?","Hvat stúrir tú mest fyri, tá tú hugsar um framtíðina hjá ungum føroyingum?"],
-["Do enough young people return after studying abroad?","Koma nóg nógv ung heim aftur til Føroya, eftir loknan lestur uttanlands?"],
-["What kind of Faroe Islands do you hope your grandchildren inherit?","Hvørjar Føroyar vónar tú, at abbabørnini hjá tær fara at arva?"],
-["When you stand on a Faroese cliff looking at the Atlantic, what do visitors often miss?","Tá tú stendur á einum føroyskum bergi, hvat er tað, sum vitjandi ofta ikki síggja ella skilja?"],
-["What gives you hope?","Hvat gevur tær vón fyri framtíðina?"],
-];
-
-const Q_NIELS = [
-["How important is salmon farming to the Faroese economy today?","Hvussu týdningarmikil er alivinnan fyri føroyska búskapin í dag?"],
-["How many jobs does the industry support, directly and indirectly?","Hvussu nógv arbeiðspláss skapar alivinnan, bæði beinleiðis og óbeinleiðis?"],
-["What would happen to the Faroe Islands if salmon farming declined significantly?","Hvat hevði tað merkt fyri Føroyar, um alivinnan minkaði munandi?"],
-["The Faroes describe themselves as a global leader in sustainable salmon farming. What are you doing differently from Scotland or Norway?","Føroyar verða ofta nevndar sum eitt av fremstu londunum innan burðardygga laksaaling. Hvat gera Føroyar øðrvísi enn til dømis Skotland og Noreg?"],
-["How do you balance economic growth with protecting the marine environment?","Hvussu verður javnvág skapt millum búskaparligan vøkstur og verjuna av havumhvørvinum?"],
-["What lessons could other salmon-producing nations learn from the Faroese model?","Hvat kunnu onnur alilond læra av føroyska leistinum?"],
-];
-
-function qbox(title, questions){
-  if(!questions || !questions.length) return "";
-  const items = questions.map(([en,fo]) => `
-    <div class="qitem">
-      <div class="en"><span class="qtag">🇬🇧</span>${en}</div>
-      <div class="fo"><span class="qtag">🇫🇴</span>${fo}</div>
-    </div>`).join("");
-  return `
-    <details class="qbox">
-      <summary>Interview questions — ${title} (${questions.length})</summary>
-      <div class="qlist">${items}</div>
-    </details>`;
+function initials(name){
+  return name.split(" ").map(w=>w[0]).filter(Boolean).slice(0,2).join("").toUpperCase();
 }
 
-/* ---------------- SCHEDULE ---------------- */
+function statusBadge(status){
+  if(status==="confirmed") return '<span class="badge confirmed">Confirmed</span>';
+  if(status==="tbc") return '<span class="badge tbc">TBC</span>';
+  if(status==="not-filmed") return '<span class="badge not-filmed">Not filmed</span>';
+  return "";
+}
 
-const DAYS = [
-{
-  date:"Saturday 25 July", focus:"Arrival and Pál Weihe interview",
-  events:[
-    { time:"Afternoon", title:"Crew arrival & transfer", location:"Vágar Airport", people:[...CORE],
-      status:"confirmed",
-      notes:["Airport pickup and transfer to accommodation.","Short production briefing if timing allows."] },
-    { time:"18:00–19:00", title:"Interview: Professor Pál Weihe", location:"Gamla Hoyvík (outdoor, TBC vs. home in Mannbrekka)",
-      people:[...CORE,"Professor Pál Weihe"], status:"confirmed",
-      chips:["Whale meat research","English"],
-      notes:["Proposed location is outdoors at Gamla Hoyvík, close to where Pál lives — strong sea background, clear link to story.","Pál would like questions in advance if possible.","Location decision still open: Gamla Hoyvík vs. his home in Mannbrekka."],
-      questions: qbox("Pál Weihe", Q_PAL) },
-  ]
-},
-{
-  date:"Sunday 26 July", focus:"Environmental story and fishing family",
-  events:[
-    { time:"Pickup 08:30 · Shoot 09:00–12:00", title:"Interview: Annika Arnsteinsdóttir (Rudda Føroyar)",
-      location:"Hugskotið, Eystara Bryggja — then moving outdoors / onto the crew bus",
-      people:[...CORE,"Annika Arnsteinsdóttir"], status:"confirmed",
-      chips:["Environment / climate"],
-      notes:["Themes: sea temperature, fish migration, salmon farming, coastal pollution.","Questions need to be sent in advance.","If filmed on a boat, this must be agreed and budgeted separately."],
-      questions: qbox("Annika Arnsteinsdóttir", Q_ANNIKA) },
-    { time:"Depart Tórshavn 14:00 · Arrive Eiði 14:45 · Shoot 15:00–19:00 · Return 19:15",
-      title:"Fishing family: Jenny & Sonni Kallsoy", location:"Eiði",
-      people:[...CORE,"Jenny Kallsoy","Sonni Kallsoy"], status:"confirmed",
-      chips:["Fishing family","Faroese only"],
-      notes:["Retired couple in their 70s, still fish from their own small boat.","Children haven't taken over, but grandson is interested — confirmed if available.","Possible scenes: family interview, harbour, small boat, fishing gear, grandson, generational contrast.","They speak Faroese only — questions should be prepared in advance."],
-      questions: qbox("Jenny & Sonni Kallsoy", Q_KALLSOY) },
-  ]
-},
-{
-  date:"Monday 27 July", focus:"Language, identity and government",
-  events:[
-    { time:"Pickup 07:45 · Interview 08:00–09:00", title:"Interview: Súsanna Sørensen (Visit Faroe Islands)",
-      location:"Visit Faroe Islands office, Tinganes, Tórshavn",
-      people:[...CORE,"Súsanna Sørensen"], status:"confirmed",
-      chips:["Language & identity"],
-      notes:["Themes: Faroese language, cultural identity, Google Translate, small languages & technology.","If weather allows, may be filmed outside; otherwise indoors with harbour visible in background."],
-      questions: qbox("Súsanna Sørensen", Q_SUSANNA) },
-    { time:"Interview window 10:30–11:00 · Wrap ~11:15", title:"Government interview: Beinir Johannesen, Prime Minister",
-      location:"Government offices, Tinganes",
-      people:[...CORE,"Beinir Johannesen","Bjarni Arge"], status:"confirmed",
-      chips:["English","Formal interior — may move outside if too dark"],
-      notes:["Themes: relationship with Denmark, Faroes outside the EU, North Atlantic geopolitics, language & culture, young people staying, the islands' future.",'<span class="flag-note">Important: the climate change question has been removed for this interview — not the right question for this contributor.</span>'],
-      questions: qbox("Beinir Johannesen", Q_BEINIR) },
-    { time:"15:00", title:"Interview: Jóannes Eidesgaard (former Prime Minister)", location:"Skansin, Tórshavn",
-      people:[...CORE,"Jóannes Eidesgaard"], status:"confirmed",
-      chips:["Society & politics"],
-      notes:["Former Prime Minister, former leader of Javnaðarflokkurin, political commentator.","Themes: Faroese society, politics, relationship with Denmark, EU, geopolitics, fishing, sovereignty, identity.","Questions prepared in both English and Faroese below."],
-      questions: qbox("Jóannes Eidesgaard", Q_JOANNES) },
-  ]
-},
-{
-  date:"Tuesday 28 July", focus:"Ólavsøka and B-roll",
-  events:[
-    { time:"13:00–18:30", title:"Ólavsøka rowing", location:"Tórshavn harbour",
-      people:[...CORE], status:"confirmed", chips:["B-roll / atmosphere"],
-      notes:["Main focus of the day is national holiday atmosphere — no heavy sit-down interviews planned unless a very special opportunity arises."] },
-    { time:"~14:00–15:00", title:"Official Ólavsøka opening, procession & ceremony", location:"Vaglið",
-      people:[...CORE], status:"confirmed", chips:["Procession","National dress"] },
-    { time:"~15:00", title:"Main rowing competition", location:"Tórshavn harbour",
-      people:[...CORE], status:"confirmed",
-      notes:["Possible scenes: national dress, crowds, flags, horses in procession, piece to camera with Jeff Moody, short vox pops.","Tórshavn will be very busy — movement, parking and access must be planned carefully.","Exact 2026 programme to be reconfirmed closer to the shoot."] },
-  ]
-},
-{
-  date:"Wednesday 29 July", focus:"Ólavsøka and B-roll",
-  events:[
-    { time:"Pickup 10:00 · ~10:45", title:"Procession: Parliament → Havnar Kirkja", location:"Tinganes → Havnar Kirkja",
-      people:[...CORE], status:"confirmed", chips:["Procession"] },
-    { time:"11:00–12:00", title:"Ólavsøka church service", location:"Havnar Kirkja",
-      people:[...CORE], status:"not-filmed", notFilmed:true,
-      notes:['<span class="flag-note">Not permitted for filming — do not plan to film inside the church service.</span>'] },
-    { time:"~12:00", title:"Procession returns", location:"Havnar Kirkja → Parliament",
-      people:[...CORE], status:"confirmed", chips:["Procession"] },
-    { time:"~12:00–13:30", title:"Opening of the Parliamentary Year", location:"Tinganes",
-      people:[...CORE], status:"not-filmed", notFilmed:true,
-      notes:['<span class="flag-note">Not permitted for filming — no access to the parliamentary opening.</span>'] },
-    { time:"Afternoon", title:"Cultural B-roll / landscapes", location:"Tórshavn & surroundings",
-      people:[...CORE], status:"confirmed",
-      chips:["Chain dance TBC","Choir","Brass band"],
-      notes:["If not filming the festivities in Tórshavn, recommend using the time for landscape B-roll instead.","Faroese chain dance (Sjónleikarahúsið) could be a strong scene, but timing, access, light and sound need confirming before it's locked into the call sheet."] },
-  ]
-},
-{
-  date:"Thursday 30 July", focus:"Tunnel PTC, drone and final pickups",
-  events:[
-    { time:"13:00–14:30", title:"Interview: Uni Danielsen (Tunnil.fo)",
-      location:"Runavík HQ or entrance to Eysturoyartunnilin (Streymoy side)",
-      people:[...CORE,"Uni Danielsen"], status:"pending",
-      chips:["Undersea tunnels","Awaiting theme from Jeff"],
-      notes:['<span class="flag-note">Awaiting final theme/questions from Jeff Moody.</span> Topic: tunnel architecture and economic significance for the Faroe Islands.'] },
-    { time:"15:00–16:00", title:"Interview: Niels Winher, CEO Chamber of Commerce",
-      location:"Inside or outside The House of Industry",
-      people:[...CORE,"Niels Winher"], status:"confirmed",
-      chips:["Salmon industry"],
-      notes:["Themes: the salmon industry's importance to the Faroese economy."],
-      questions: qbox("Niels Winher", Q_NIELS) },
-    { time:"Throughout the day", title:"Tunnel PTC, drone and coastal B-roll", location:"Various",
-      people:[...CORE], status:"confirmed",
-      chips:["Drone (weather/permissions permitting)"],
-      notes:["Possible scenes: tunnel / undersea roundabout piece to camera, waterfalls, seascapes, harbours, mountain roads, villages, final missing shots.","Final full shoot day — kept flexible to complete the visual story."] },
-  ]
-},
-{
-  date:"Friday 31 July", focus:"Departure",
-  events:[
-    { time:"Morning", title:"Wrap and departure", location:"Hotel → Vágar Airport",
-      people:[...CORE], status:"confirmed",
-      notes:["Hotel pickup, airport transfer, final practical wrap-up.","No formal filming planned unless agreed in advance."] },
-  ]
-},
-];
+function cameraSlashIcon(){
+  return '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+}
 
-/* ---------------- RENDER ---------------- */
+let qaCounter = 0;
 
-function eventCard(ev){
-  const notFilmedCls = ev.notFilmed ? " not-filmed" : "";
-  const badgeCls = ev.notFilmed ? "not-filmed" : (ev.status === "pending" ? "pending" : "confirmed");
-  const badgeLabel = ev.notFilmed ? "Not filmed" : (ev.status === "pending" ? "Pending" : "Confirmed");
-  const camIcon = ev.notFilmed ? "🚫🎥 " : "";
-  const chips = (ev.chips||[]).map(c=>`<span class="chip">${c}</span>`).join("");
-  const peopleChips = (ev.people||[]).map(p=>{
-    const isContrib = !CORE.includes(p);
-    return `<span class="chip${isContrib? " contrib":""}">${p}</span>`;
+function renderEvent(ev, filterName){
+  qaCounter++;
+  const qaId = "qa-"+qaCounter;
+  const notFilmed = ev.status==="not-filmed";
+
+  let peopleHtml = ev.people.map(p=>{
+    const isYou = filterName && p===filterName;
+    return `<span class="chip${isYou?' you':''}">${p}</span>`;
   }).join("");
-  const notes = ev.notes && ev.notes.length ? `<div class="event-notes"><ul>${ev.notes.map(n=>`<li>${n}</li>`).join("")}</ul></div>` : "";
+
+  let themesHtml = ev.themes ? `<div class="themes"><strong>Themes</strong><br>${ev.themes.join(" · ")}</div>` : "";
+  let noteHtml = ev.note ? `<p>${ev.note}</p>` : "";
+  let flagHtml = notFilmed ? `<div class="not-filmed-flag">${cameraSlashIcon()} Not permitted for filming</div>` : "";
+
+  let qaHtml = "";
+  if(ev.contributor && QA[ev.contributor]){
+    const qa = QA[ev.contributor];
+    const hasItems = qa.items.length > 0;
+    qaHtml = `
+      <button class="toggle-btn" onclick="toggleQA('${qaId}')">▸ ${hasItems ? "Show interview questions ("+qa.items.length+")" : "Show interview themes"}</button>
+      <div class="qa-panel" id="${qaId}">
+        ${qa.note ? `<div class="qa-note">${qa.note}</div>` : ""}
+        ${qa.items.map(([en,fo])=>`
+          <div class="qa-item">
+            <div class="qa-en"><span class="qa-flag">🇬🇧</span>${en}</div>
+            <div class="qa-fo"><span class="qa-flag">🇫🇴</span>${fo}</div>
+          </div>`).join("")}
+      </div>`;
+  }
+
+  // Documents / links — structure ready for scene-level docs when available
+  const docs = ev.docs || [];
+  const docsHtml = `<div class="docs">${
+    docs.length
+      ? docs.map(d=>`<a class="doc-link" href="${d.url}" target="_blank" rel="noopener">📎 ${d.label}</a>`).join("")
+      : `<span class="docs-empty">No documents linked yet</span>`
+  }</div>`;
+
   return `
-    <div class="event${notFilmedCls}" data-people="${(ev.people||[]).join('|')}">
+    <div class="event ${notFilmed?'not-filmed':(ev.status==='tbc'?'tbc':'')}">
       <div class="event-top">
-        <div>
-          <div class="event-time">${camIcon}${ev.time}</div>
+        <div class="event-time">${ev.time}</div>
+        <div class="event-main">
           <div class="event-title">${ev.title}</div>
+          <div class="event-loc">📍 ${ev.location}</div>
         </div>
-        <span class="badge ${badgeCls}">${badgeLabel}</span>
+        ${statusBadge(ev.status)}
       </div>
-      <div class="event-loc">${ev.location}</div>
-      <div class="chips">${peopleChips}${chips}</div>
-      ${notes}
-      ${ev.questions || ""}
+      <div class="event-body">
+        ${flagHtml}
+        ${noteHtml}
+        ${themesHtml}
+        <div class="chips">${peopleHtml}</div>
+        ${qaHtml}
+        ${docsHtml}
+      </div>
     </div>`;
 }
 
-function dayBlock(day, filterName){
-  let events = day.events;
-  if(filterName){
-    events = events.filter(ev => (ev.people||[]).includes(filterName));
+function toggleQA(id){
+  const el = document.getElementById(id);
+  el.classList.toggle("open");
+  const btn = el.previousElementSibling;
+  if(el.classList.contains("open")){
+    btn.innerHTML = btn.innerHTML.replace("▸","▾");
+  } else {
+    btn.innerHTML = btn.innerHTML.replace("▾","▸");
   }
-  if(!events.length) return "";
-  return `
-    <div class="day">
-      <div class="day-head">
-        <div class="day-date">${day.date}</div>
-        <div class="day-focus">${day.focus}</div>
-      </div>
-      ${events.map(eventCard).join("")}
-    </div>`;
 }
 
-function renderFullSchedule(){
-  document.getElementById("schedule-days").innerHTML = DAYS.map(d => dayBlock(d, null)).join("");
+function renderDays(days, filterName){
+  return days.map(day=>{
+    const events = filterName ? day.events.filter(e=>e.people.includes(filterName)) : day.events;
+    if(filterName && events.length===0) return "";
+    return `
+      <div class="day">
+        <div class="day-head">
+          <div class="day-date">${day.date}</div>
+          <div class="day-title">${day.title}</div>
+        </div>
+        <div class="day-sub">${day.sub}</div>
+        ${events.map(e=>renderEvent(e, filterName)).join("")}
+      </div>`;
+  }).join("");
 }
 
-function collectAllNames(){
-  const set = new Set();
-  DAYS.forEach(d => d.events.forEach(ev => (ev.people||[]).forEach(p => set.add(p))));
-  // Order: core crew first, then everyone else alphabetically
-  const others = [...set].filter(n => !CORE.includes(n)).sort();
-  return [...CORE, ...others];
-}
-
-function renderNameSelect(){
-  const sel = document.getElementById("name-select");
-  collectAllNames().forEach(name => {
-    const opt = document.createElement("option");
-    opt.value = name; opt.textContent = name;
-    sel.appendChild(opt);
-  });
-  sel.addEventListener("change", () => renderMySchedule(sel.value));
-}
-
-function renderMySchedule(name){
-  const container = document.getElementById("myschedule-days");
-  if(!name){
-    container.innerHTML = `<div class="empty-state">Select your name above to see your personal schedule.</div>`;
-    return;
-  }
-  const blocks = DAYS.map(d => dayBlock(d, name)).filter(Boolean).join("");
-  container.innerHTML = blocks || `<div class="empty-state">No scheduled events found for ${name}.</div>`;
-}
-
-function contactCard(c){
-  const initials = c.name.split(" ").filter(w=>w.length>1||/[A-ZÁÐÍÓÚÝÆØŁ]/.test(w)).map(w=>w[0]).slice(0,2).join("").toUpperCase();
-  const email = c.email ? `<a href="mailto:${c.email}">${c.email}</a>` : "";
-  const phone = c.phone ? `<a href="tel:${c.phone.replace(/\s+/g,'')}">${c.phone}</a>` : "";
+function renderContactCard(c){
   return `
     <div class="contact-card">
-      <div class="avatar">${initials}</div>
-      <div class="contact-info">
-        <div class="name">${c.name}</div>
-        <div class="role">${c.role}</div>
-        ${email}${phone}
+      <div class="avatar">${initials(c.name)}</div>
+      <div>
+        <div class="contact-name">${c.name}</div>
+        <div class="contact-role">${c.role}${c.org?" · "+c.org:""}</div>
+        ${c.email?`<div class="contact-detail">${c.email}</div>`:""}
+        ${c.phone?`<div class="contact-detail">${c.phone}</div>`:""}
       </div>
     </div>`;
 }
 
-function renderContacts(){
-  document.getElementById("contacts-crew").innerHTML = CONTACTS.crew.map(contactCard).join("");
-  document.getElementById("contacts-local").innerHTML = CONTACTS.local.map(contactCard).join("");
-  document.getElementById("contacts-contrib").innerHTML = CONTACTS.contrib.map(contactCard).join("");
-  document.getElementById("contacts-gov").innerHTML = CONTACTS.gov.map(contactCard).join("");
+/* ---- init ---- */
+document.getElementById("schedule-full").innerHTML = renderDays(DAYS, null);
+
+// build "who" dropdown from union of all people across events
+const allNames = new Set();
+DAYS.forEach(d=>d.events.forEach(e=>e.people.forEach(p=>allNames.add(p))));
+const namesSorted = [...allNames].sort();
+const whoSelect = document.getElementById("who");
+whoSelect.innerHTML = namesSorted.map(n=>`<option value="${n}">${n}</option>`).join("");
+function renderMine(){
+  const name = whoSelect.value;
+  document.getElementById("schedule-mine").innerHTML = renderDays(DAYS, name);
 }
+whoSelect.addEventListener("change", renderMine);
+whoSelect.value = "Michael Koba";
+renderMine();
 
-/* ---------------- TABS ---------------- */
+document.getElementById("contacts-crew").innerHTML = CONTACTS.crew.map(renderContactCard).join("");
+document.getElementById("contacts-local").innerHTML = CONTACTS.local.map(renderContactCard).join("");
+document.getElementById("contacts-contributors").innerHTML = CONTACTS.contributors.map(renderContactCard).join("");
+document.getElementById("contacts-government").innerHTML = CONTACTS.government.map(renderContactCard).join("");
 
+/* ---- tabs ---- */
 document.querySelectorAll(".tab-btn").forEach(btn=>{
   btn.addEventListener("click", ()=>{
     document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
@@ -792,26 +659,6 @@ document.querySelectorAll(".tab-btn").forEach(btn=>{
     document.getElementById("view-"+btn.dataset.view).classList.add("active");
   });
 });
-
-function goHome(){
-  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
-  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
-  const scheduleBtn = document.querySelector('.tab-btn[data-view="schedule"]');
-  scheduleBtn.classList.add("active");
-  document.getElementById("view-schedule").classList.add("active");
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-const homeLink = document.getElementById("home-link");
-homeLink.addEventListener("click", goHome);
-homeLink.addEventListener("keydown", (e)=>{
-  if(e.key === "Enter" || e.key === " "){ e.preventDefault(); goHome(); }
-});
-
-renderFullSchedule();
-renderNameSelect();
-renderMySchedule("");
-renderContacts();
 </script>
-
 </body>
 </html>
