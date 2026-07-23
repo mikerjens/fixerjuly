@@ -241,6 +241,7 @@
       <button class="tab-btn active" data-view="schedule">Full Schedule</button>
       <button class="tab-btn" data-view="mine">My Schedule</button>
       <button class="tab-btn" data-view="contacts">Contacts</button>
+      <button class="tab-btn" data-view="info">Production Info</button>
     </nav>
   </div>
 </header>
@@ -249,22 +250,6 @@
 
   <!-- FULL SCHEDULE -->
   <section class="view active" id="view-schedule">
-    <div class="card">
-      <h3>Production summary</h3>
-      <p>This production explores the relationship between the Faroe Islands and the sea — fishing, food culture, identity, language, environmental pressure and the islands' political and cultural position. The shoot combines human stories, expert interviews, government perspective, Ólavsøka coverage and visual material from across the islands.</p>
-    </div>
-    <div class="card">
-      <h3>Production strategy</h3>
-      <div class="strategy-note">Main interviews are scheduled around Ólavsøka. 28–29 July are the Faroese national holiday days, used mainly for atmosphere, national identity, music, rowing, public events and B-roll.</div>
-      <div class="strategy-note">The government interview is set for Monday 27 July, since 26 July is a Sunday.</div>
-      <div class="strategy-note">Not permitted for filming: the Ólavsøka church service at Havnar Kirkja, and the Opening of the Parliamentary Year at Tinganes — flagged in red on the schedule below.</div>
-    </div>
-    <div class="card">
-      <h3>Priority elements</h3>
-      <p><strong>Must have:</strong> Pál Weihe interview · Environmental / climate interview · Fishing family · Government interview · Ólavsøka &amp; B-roll · Language and identity interview · Tunnel / undersea roundabout PTC · Strong Faroese visual material.</p>
-      <p><strong>Should have:</strong> Kallsoy grandson on the boat (confirmed) · Boat access (confirmed) · Drone footage · Ólavsøka choir · Faroese chain dance if accessible · Vox pops · Harbour &amp; coastal scenes.</p>
-      <p><strong>To decide:</strong> Exact questions per contributor · Boat interview vs. boat B-roll · Drone permissions &amp; locations · Tunnel filming details · Final pickup points &amp; call sheets.</p>
-    </div>
     <div id="schedule-full"></div>
   </section>
 
@@ -272,7 +257,9 @@
   <section class="view" id="view-mine">
     <div class="filter-bar">
       <label for="who">I am:</label>
-      <select id="who"></select>
+      <select id="who">
+        <option value="" selected disabled>Select your name…</option>
+      </select>
     </div>
     <div id="schedule-mine"></div>
   </section>
@@ -287,6 +274,26 @@
     <div class="contact-grid" id="contacts-contributors"></div>
     <div class="section-label">Government / Press</div>
     <div class="contact-grid" id="contacts-government"></div>
+  </section>
+
+  <!-- PRODUCTION INFO -->
+  <section class="view" id="view-info">
+    <div class="card">
+      <h3>Production summary</h3>
+      <p>This production explores the relationship between the Faroe Islands and the sea — fishing, food culture, identity, language, environmental pressure and the islands' political and cultural position. The shoot combines human stories, expert interviews, government perspective, Ólavsøka coverage and visual material from across the islands.</p>
+    </div>
+    <div class="card">
+      <h3>Production strategy</h3>
+      <div class="strategy-note">Main interviews are scheduled around Ólavsøka. 28–29 July are the Faroese national holiday days, used mainly for atmosphere, national identity, music, rowing, public events and B-roll.</div>
+      <div class="strategy-note">The government interview is set for Monday 27 July, since 26 July is a Sunday.</div>
+      <div class="strategy-note">Not permitted for filming: the Ólavsøka church service at Havnar Kirkja, and the Opening of the Parliamentary Year at Tinganes — flagged in red on the schedule.</div>
+    </div>
+    <div class="card">
+      <h3>Priority elements</h3>
+      <p><strong>Must have:</strong> Pál Weihe interview · Environmental / climate interview · Fishing family · Government interview · Ólavsøka &amp; B-roll · Language and identity interview · Tunnel / undersea roundabout PTC · Strong Faroese visual material.</p>
+      <p><strong>Should have:</strong> Kallsoy grandson on the boat (confirmed) · Boat access (confirmed) · Drone footage · Ólavsøka choir · Faroese chain dance if accessible · Vox pops · Harbour &amp; coastal scenes.</p>
+      <p><strong>To decide:</strong> Exact questions per contributor · Boat interview vs. boat B-roll · Drone permissions &amp; locations · Tunnel filming details · Final pickup points &amp; call sheets.</p>
+    </div>
   </section>
 
 </main>
@@ -636,13 +643,16 @@ const allNames = new Set();
 DAYS.forEach(d=>d.events.forEach(e=>e.people.forEach(p=>allNames.add(p))));
 const namesSorted = [...allNames].sort();
 const whoSelect = document.getElementById("who");
-whoSelect.innerHTML = namesSorted.map(n=>`<option value="${n}">${n}</option>`).join("");
+whoSelect.innerHTML += namesSorted.map(n=>`<option value="${n}">${n}</option>`).join("");
 function renderMine(){
   const name = whoSelect.value;
+  if(!name){
+    document.getElementById("schedule-mine").innerHTML = `<p style="color:var(--muted); font-size:14px;">Select your name above to see your schedule.</p>`;
+    return;
+  }
   document.getElementById("schedule-mine").innerHTML = renderDays(DAYS, name);
 }
 whoSelect.addEventListener("change", renderMine);
-whoSelect.value = "Michael Koba";
 renderMine();
 
 document.getElementById("contacts-crew").innerHTML = CONTACTS.crew.map(renderContactCard).join("");
