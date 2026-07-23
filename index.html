@@ -38,6 +38,9 @@
     position:sticky; top:0; z-index:50;
   }
   .top-inner{max-width:1000px; margin:0 auto;}
+  .home-link{display:block; text-decoration:none; color:inherit; cursor:pointer; width:fit-content;}
+  .home-link:hover .eyebrow{color:#5a9bd6;}
+  .home-link:hover h1{color:#cfe0ef;}
   .eyebrow{
     font-size:11px; letter-spacing:.14em; text-transform:uppercase;
     color:var(--blue); font-weight:600; margin-bottom:6px;
@@ -218,8 +221,10 @@
 
 <header class="top">
   <div class="top-inner">
-    <div class="eyebrow">FIXER.FO · Production Portal</div>
-    <h1>CGTN Faroe Islands</h1>
+    <a href="#" class="home-link" id="home-link" aria-label="Go to Full Schedule">
+      <div class="eyebrow">FIXER.FO · Production Portal</div>
+      <h1>CGTN Faroe Islands</h1>
+    </a>
     <div class="sub"><strong>25–31 July 2026</strong> · Local production partner: FIXER sp/f</div>
 
     <div class="grid-2 travel-row">
@@ -387,8 +392,14 @@ const QA = {
     ]
   },
   susanna: {
-    note: "No fixed question list — Jeff prefers to talk around key themes: the Faroe Islands Translate project and the Sheep View project (how the ideas came about, how they worked in practice, and how successful they've been).",
-    items: []
+    note: "No fixed question list — Jeff prefers to talk around key themes: the Faroe Islands Translate project and the Sheep View project. These guiding questions give a sense of where the interview is heading.",
+    items: [
+      ["How did they come up with the idea?", ""],
+      ["What were the schemes?", ""],
+      ["How did they work?", ""],
+      ["How important was it to succeed?", ""],
+      ["How successful were they?", ""]
+    ]
   },
   niels: {
     note: "Questions have been sent to Niels Winher in advance.",
@@ -561,7 +572,7 @@ function renderEvent(ev, filterName){
         ${qa.items.map(([en,fo])=>`
           <div class="qa-item">
             <div class="qa-en"><span class="qa-flag">🇬🇧</span>${en}</div>
-            <div class="qa-fo"><span class="qa-flag">🇫🇴</span>${fo}</div>
+            ${fo ? `<div class="qa-fo"><span class="qa-flag">🇫🇴</span>${fo}</div>` : ""}
           </div>`).join("")}
       </div>`;
   }
@@ -661,13 +672,22 @@ document.getElementById("contacts-contributors").innerHTML = CONTACTS.contributo
 document.getElementById("contacts-government").innerHTML = CONTACTS.government.map(renderContactCard).join("");
 
 /* ---- tabs ---- */
+function goToView(viewName){
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  const btn = document.querySelector(`.tab-btn[data-view="${viewName}"]`);
+  if(btn) btn.classList.add("active");
+  document.getElementById("view-"+viewName).classList.add("active");
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
 document.querySelectorAll(".tab-btn").forEach(btn=>{
-  btn.addEventListener("click", ()=>{
-    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
-    document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
-    btn.classList.add("active");
-    document.getElementById("view-"+btn.dataset.view).classList.add("active");
-  });
+  btn.addEventListener("click", ()=>goToView(btn.dataset.view));
+});
+
+document.getElementById("home-link").addEventListener("click", (e)=>{
+  e.preventDefault();
+  goToView("schedule");
 });
 </script>
 </body>
